@@ -3,13 +3,14 @@
 const express = require("express");
 const mongoose = require("mongoose"); 
 
-/* const JwtStrategy = require('passport-jwt').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require("passport");
-const User = require("./models/User");
+const Student = require("./models/Student");
+const Faculty = require("./models/Faculty");
 const authRoutes = require("./models/routes/auth");
-const songRoutes = require("./models/routes/song");
-const playlistRoutes = require("./models/routes/playlist"); */
+const studentRoutes = require("./models/routes/student");
+const facultyRoutes = require("./models/routes/faculty"); 
 require("dotenv").config(); 
 const cors = require("cors"); 
 
