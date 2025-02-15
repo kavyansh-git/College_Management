@@ -9,6 +9,7 @@ const passport = require("passport");
 const Student = require("./models/Student");
 const Faculty = require("./models/Faculty");
 const authRoutes = require("./models/routes/auth");
+const adminRoutes = require("./models/routes/admin");
 const studentRoutes = require("./models/routes/student");
 const facultyRoutes = require("./models/routes/faculty"); 
 require("dotenv").config(); 
