@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const User = new mongoose.Schema({
+const Faculty = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
@@ -11,9 +11,9 @@ const User = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: false,
     },
-    username: {
+    facultyId: {
         type: String,
         required: true,
     },
@@ -22,20 +22,28 @@ const User = new mongoose.Schema({
         required: true,
         private: true,
     },
-    likedSongs: {
+    dept: {
         type: String,
         default: "",
     },
-    likedPlaylists: {
+    specialization: {
+        type: String,
+        default: "",
+    },    
+    fatherName: {
         type: String,
         default: "",
     },
-    subscribedArtists: {
+    motherName: {
+        type: String,
+        default: "",
+    },
+    address: {
         type: String,
         default: "",
     }
 });
 
-const userModel = mongoose.model("User" , User);
+const facultyModel = mongoose.model("Faculty" , Faculty);
 
-module.exports = userModel;
+module.exports = facultyModel;

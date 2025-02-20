@@ -1,31 +1,31 @@
 
 const express = require("express");
 const passport = require("passport");
-const Playlist = require("../../models/Playlist");
+const Student = require("../../models/Student");
 const User = require("../../models/User");
 const Song = require("../../models/Song");
 
 const router = express.Router();
 
-// Route 1: Create a playlist
+// Route 1: Create a student
 router.post(
     "/create",
     passport.authenticate("jwt", {session: false}),
     async (req, res) => {
-        const currentUser = req.user;
+        const currentUser = req.admin;
         const {name, thumbnail, songs} = req.body;
         if (!name || !thumbnail || !songs) {
             return res.status(301).json({err: "Insufficient data"});
         }
-        const playlistData = {
+        const studentData = {
             name,
             thumbnail,
             songs,
             owner: currentUser._id,
             collaborators: [],
         };
-        const playlist = await Playlist.create(playlistData);
-        return res.status(200).json(playlist);
+        const student = await Student.create(studentData);
+        return res.status(200).json(student);
     }
 );
 
@@ -37,7 +37,7 @@ router.post(
 // If you call anything of the format /playlist/get/asdvniuen (asdvniuen can be anything), this api is called
 // If you called /playlist/get/asdvniuen, the playlistId variable gets assigned teh value asdvniuen.
 router.get(
-    "/get/playlist/:playlistId",
+    "/get/student/:playlistId",
     passport.authenticate("jwt", {session: false}),
     async (req, res) => {
         // This concept is called req.params
