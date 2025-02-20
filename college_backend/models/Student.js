@@ -31,11 +31,7 @@ const Student = new mongoose.Schema({
     },
     regNo: {
         type: String,
-        required: true,
-    },
-    studentId: {
-        type: String,
-        required: true,
+        required: false,
     },
     password: {
         type: String,
@@ -44,31 +40,31 @@ const Student = new mongoose.Schema({
     },
     fatherName: {
         type: String,
-        required: true,
+        required: false,
     },
     motherName: {
         type: String,
-        required: true,
+        required: false,
     },
     fatherOccupation: {
         type: String,
-        required: true,
+        required: false,
     },
     motherOccupation: {
         type: String,
-        required: true,
+        required: false,
     },
     permanentAddress: {
         type: String,
-        required: true,
+        required: false,
     },
     mailingAddress: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
-        required: true,
+        required: false,
     },
     contactNoStudent: [
             {

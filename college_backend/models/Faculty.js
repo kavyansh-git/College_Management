@@ -5,7 +5,60 @@ const Faculty = new mongoose.Schema({
         type: String,
         required: true,
     },
+    middleName: {
+        type: String,
+        required: false,
+    },
     lastName: {
+        type: String,
+        required: true,
+    },
+    facultyId: {
+        type: String,
+        required: true,
+    },
+    branch: {
+        type: String,
+        required: true,
+    },
+    yearOfJoining: {
+        type: String,
+        required: false,
+    },
+    regNo: {
+        type: String,
+        required: false,
+    },
+    qualification: {
+        type: String,
+        required: false,
+    },
+    experience: {
+        type: String,
+        required: false,
+    },
+    password: {
+        type: String,
+        required: true,
+        private: true,
+    },
+    fatherName: {
+        type: String,
+        required: false,
+    },
+    motherName: {
+        type: String,
+        required: false,
+    },
+    specialization: {
+        type: String,
+        required: true,
+    },
+    permanentAddress: {
+        type: String,
+        required: false,
+    },
+    mailingAddress: {
         type: String,
         required: false,
     },
@@ -13,34 +66,23 @@ const Faculty = new mongoose.Schema({
         type: String,
         required: false,
     },
-    facultyId: {
+    contactNoFaculty: [
+            {
+            type: String,
+            required: false,   
+            }
+    ],
+    profileImage: {
         type: String,
-        required: true,
+        required: false,
     },
-    password: {
+    nationality: {
         type: String,
-        required: true,
-        private: true,
+        required: false,
     },
-    dept: {
+    religion: {
         type: String,
-        default: "",
-    },
-    specialization: {
-        type: String,
-        default: "",
-    },    
-    fatherName: {
-        type: String,
-        default: "",
-    },
-    motherName: {
-        type: String,
-        default: "",
-    },
-    address: {
-        type: String,
-        default: "",
+        required: false,
     }
 });
 
