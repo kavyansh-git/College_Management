@@ -19,15 +19,15 @@ const Student = new mongoose.Schema({
     },
     course: {
         type: String,
-        required: true,
+        required: false,
     },
     batch: {
         type: String,
-        required: true,
+        required: false,
     },
     branch: {
         type: String,
-        required: true,
+        required: false,
     },
     regNo: {
         type: String,

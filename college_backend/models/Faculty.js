@@ -19,7 +19,7 @@ const Faculty = new mongoose.Schema({
     },
     branch: {
         type: String,
-        required: true,
+        required: false,
     },
     yearOfJoining: {
         type: String,

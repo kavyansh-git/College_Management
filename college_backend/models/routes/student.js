@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const Song = require("../../models/Song");
-const Student = require("../../models/Student");
-const User = require("../../models/User");
+const Song = require("../Song");
+const User = require("../User");
+const Student = require("../Student");
+const Admin = require("../Admin");
 
 router.post("/create", passport.authenticate("jwt", {session: false}), async (req, res) => {
     // req.user gets the user because of passport.authenticate
-    const{firstName, lastName, rollNo, course, batch, branch} = req.body;
+    const{name, thumbnail, track} = req.body;
     if(!name || !thumbnail || !track) {
         return res
             .status(301)
