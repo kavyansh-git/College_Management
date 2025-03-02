@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 
 // This POST route will help to register a student
 router.post("/studentRegister", async (req, res) => {
-    // This code is run when the /register API is called as POST request
+    // This code is run when the /studentRegister API is called as POST request
     //My req.body will be of the format{ firstName, lastName, rollNo, password }
     const { firstName, lastName, rollNo, password } = req.body;
 
@@ -31,7 +31,7 @@ router.post("/studentRegister", async (req, res) => {
           firstName,
           lastName,
           rollNo,
-          password: hashedPassword};
+          password: hashedPassword };
     const newStudent = await Student.create(newStudentData);
 
     // Step 4: we want to create a token to return to the student.

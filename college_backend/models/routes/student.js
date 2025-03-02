@@ -6,21 +6,21 @@ const User = require("../User");
 const Student = require("../Student");
 const Admin = require("../Admin");
 
-router.post("/create", passport.authenticate("jwt", {session: false}), async (req, res) => {
-    // req.user gets the user because of passport.authenticate
-    const{name, thumbnail, track} = req.body;
-    if(!name || !thumbnail || !track) {
+router.post("/createStudent", passport.authenticate("jwt", {session: false}), async (req, res) => {
+    // req.admin gets the admin because of passport.authenticate
+    const{ firstName, lastName, rollNo, password } = req.body;
+    if( !firstName || !lastName || !rollNo || !password) {
         return res
             .status(301)
-            .json({err: "Insufficient details to create song."});
+            .json({err: "Insufficient details to create student."});
     }
-    const artist = req.user._id;
-    const songDetails = {name, thumbnail, track, artist};
-    const createdSong = await Song.create(songDetails);
-    return res.status(200).json(createdSong);
+    // const admin = req.admin._id;
+    const studentDetails = { firstName, lastName, rollNo, password };
+    const createdStudent = await Student.create(studentDetails);
+    return res.status(200).json(createdStudent);
 });
 
-// Get route to get all songs i have published.
+/* // Get route to get all songs i have published.
 router.get(
     "/get/mysongs",
      passport.authenticate("jwt", {session: false}),
@@ -29,15 +29,16 @@ router.get(
         const songs = await Song.find({artist: req.user._id}).populate("artist");
         return res.status(200).json({data: songs});
     }
-);
+); */
 
  // Get route to get all songs any artist has published
  // I will send the artist id and I want to see all songs that artist has published
- router.get(
+ /* router.get(
     "/get/artist/:artistId",
      passport.authenticate("jwt", {session: false}),
      async (req, res) => {  
         const artistId = req.params.artistId;
+        
         // We can check if the artist doesn't exist.
         const artist = await User.findOne({_id: artistId});
         if (!artist) {
@@ -47,19 +48,19 @@ router.get(
         const songs = await Song.find({artist: artistId});
         return res.status(200).json({data: songs});
     }
-);
+); */
 
- // Get route to get a single song by name
+ // Get route to get a single student by name
  router.get(
-    "/get/songname/:songName",
+    "/get/studentname/:studentName",
      passport.authenticate("jwt", {session: false}),
      async (req, res) => {
-        const songName = req.params.songName;
+        const studentName = req.params.studentName;
 
-        // name: songName --> exact name matching. Vanilla, Vanila
+        // name: studentName --> exact name matching. Vanilla, Vanila
         // pattern matching instead of direct name matching.        
-        const songs = await Song.find({name: songName}).populate("artist");
-        return res.status(200).json({data: songs});
+        const students = await Student.find({firstName: studentName}).populate("firstName");
+        return res.status(200).json({data: students});
     }
 );
 
