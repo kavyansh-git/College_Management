@@ -5,10 +5,6 @@ const Student = new mongoose.Schema({
         type: String,
         required: true,
     },
-    middleName: {
-        type: String,
-        required: false,
-    },
     lastName: {
         type: String,
         required: true,
@@ -66,18 +62,14 @@ const Student = new mongoose.Schema({
         type: String,
         required: false,
     },
-    contactNoStudent: [
-            {
-            type: String,
-            required: false,   
-            }
-    ],
-    contactNoParents: [
-            {
-            type: String,
-            required: false,   
-            }
-    ],
+    contactNoStudent: {
+        type: String,
+        required: false,   
+    },
+    contactNoParents: {
+        type: String,
+        required: false,   
+    },
     profileImage: {
         type: String,
         required: false,

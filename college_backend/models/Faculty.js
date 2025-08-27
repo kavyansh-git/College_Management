@@ -5,10 +5,6 @@ const Faculty = new mongoose.Schema({
         type: String,
         required: true,
     },
-    middleName: {
-        type: String,
-        required: false,
-    },
     lastName: {
         type: String,
         required: true,
@@ -17,7 +13,7 @@ const Faculty = new mongoose.Schema({
         type: String,
         required: true,
     },
-    branch: {
+    department: {
         type: String,
         required: false,
     },
@@ -52,7 +48,7 @@ const Faculty = new mongoose.Schema({
     },
     specialization: {
         type: String,
-        required: true,
+        required: false,
     },
     permanentAddress: {
         type: String,
@@ -66,12 +62,10 @@ const Faculty = new mongoose.Schema({
         type: String,
         required: false,
     },
-    contactNoFaculty: [
-            {
-            type: String,
-            required: false,   
-            }
-    ],
+    contactNo: {
+        type: String,
+        required: false,   
+    },    
     profileImage: {
         type: String,
         required: false,
@@ -81,6 +75,14 @@ const Faculty = new mongoose.Schema({
         required: false,
     },
     religion: {
+        type: String,
+        required: false,
+    },
+    caste: {
+        type: String,
+        required: false,
+    },
+    dob: {
         type: String,
         required: false,
     }

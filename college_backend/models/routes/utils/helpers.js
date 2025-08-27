@@ -2,11 +2,10 @@ const jwt = require("jsonwebtoken");
 
 exports = {};
 
-exports.getToken = async (email, user) => {
+exports.getToken = async (actorId, actor) => {
 
-    const token = jwt.sign({identifier: user._id} , "thisKeyIsSupposedToBeSecret");
+    const token = jwt.sign({identifier: actor._id} , "thisKeyIsSupposedToBeSecret");
     return token;
-
 };
 
  module.exports = exports;
