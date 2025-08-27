@@ -2,8 +2,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import Header from "../components/shared/Header";
 import FacultySidebar from "../components/shared/FacultySidebar";
-import UploadModal from "../components/shared/UploadModal";
-import SelectFileButton from "../components/shared/SelectFileButton";
+import UploadNoticeModal from "../components/shared/UploadNoticeModal";
 import "../App.css";
 
 const FacultyDashboardComponent = () => {
@@ -164,13 +163,7 @@ const FacultyDashboardComponent = () => {
       </div>
     </div>
 
-      <UploadModal isOpen={showModal} onClose={() => setShowModal(false)}>
-
-        <h2 className="text-xl font-bold mb-4 flex items-center justify-center">Upload Your Document</h2>
-        <hr />
-        <SelectFileButton />
-
-      </UploadModal>
+      <UploadNoticeModal isOpen={showModal} onClose={() => setShowModal(false)} label="Notice" />
 
     </div>
     );

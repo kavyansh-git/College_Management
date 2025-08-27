@@ -26,19 +26,8 @@ const handleFileChange = (e) => {
     fileInputRef.current?.click();
   };
 
-  return (
-<div className="w-full h-full">
+  return (   
     
-    { previewUrl ?
-    <div className="w-8/10 h-full mt-5 overflow-auto flex items-center">
-        {previewUrl && fileType === "application/pdf" && (
-            <iframe
-                src={previewUrl}
-                title="PDF Preview"
-                className="w-full h-full border rounded-lg shadow"
-            />
-        )}
-    </div> : <div></div> }
 
     <div className="mt-2">
       {/* Hidden input */}
@@ -58,7 +47,6 @@ const handleFileChange = (e) => {
         {fileName ? <p className="text-sm text-gray-100">Selected: {fileName}</p> : <p>Select file </p>}
       </button>
       
-    </div>
     </div>
   );
 };

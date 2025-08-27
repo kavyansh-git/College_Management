@@ -15,6 +15,20 @@ export const makeUnauthenticatedPOSTRequest = async (route, body) => {
         return formattedResponse;
 };
 
+export const makeUnauthenticatedPOSTRequestForUpload = async (route, formData) => {
+    
+    // route: /studentCreate
+    const response = await fetch(backendUrl + route, 
+        {
+         method: "POST",
+         headers: { }, 
+         body: formData
+        });
+
+        const formattedResponse = await response.json();
+        return formattedResponse;
+};
+
 export const makeAuthenticatedPOSTRequest = async (route, body) => {    
     const token = getToken();
     const response = await fetch(backendUrl + route, 
