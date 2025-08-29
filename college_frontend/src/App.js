@@ -10,6 +10,7 @@ import StudentProfileComponent from "./routes/StudentProfile";
 import StudentExamsComponent from "./routes/StudentExams";
 import StudentFeesComponent from "./routes/StudentFees";
 import StudentDocsComponent from "./routes/StudentDocs";
+import StudentNotesComponent from "./routes/StudentNotes";
 import FacultyCreateComponent from "./routes/FacultyCreate";
 import FacultyLoginComponent from "./routes/FacultyLogin";
 import FacultyDashboardComponent from "./routes/FacultyDashboard";
@@ -39,6 +40,7 @@ function App() {
           <Route path="/StudentExams" element={<StudentExamsComponent />} />
           <Route path="/StudentFees" element={<StudentFeesComponent />} />
           <Route path="/StudentDocs" element={<StudentDocsComponent />} />
+          <Route path="/StudentNotes" element={<StudentNotesComponent />} />
           
           <Route path="/FacultyCreate" element={<FacultyCreateComponent />} />
           <Route path="/FacultyDashboard" element={<FacultyDashboardComponent />} />

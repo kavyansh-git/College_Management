@@ -29,25 +29,23 @@ export default function UploadPDFModal({ isOpen, onClose, label }) {
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-      <div className="relative w-6/10 h-8/10 bg-black shadow shadow-white text-white rounded-lg">
+    <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="relative w-6/10 h-8/10 border border-white shadow shadow-white text-white rounded-xl">
 
-            <div className="w-full h-1/8 text-white flex items-center justify-center">
+            <div className="w-full h-1/8 backdrop-blur-sm rounded-t-xl border-b border-gray-400 bg-white bg-opacity-10 text-white flex items-center justify-center">
                 {/* Close Button */}
                 <button
                 onClick={handleClose}
-                className="absolute top-3 right-3 text-gray-500 hover:text-white text-xl font-bold"
+                className="absolute top-3 right-3 text-gray-400 hover:text-white text-xl font-bold"
                 >
                 &times;
                 </button>
 
                 <h2 className="text-xl font-semibold flex items-center justify-center">Upload {label}</h2>
-                <hr className="ml-4 mr-4"/>
-            </div>
+                <hr className=""/>
+            </div> 
 
-            <hr className="ml-4 mr-4"/> 
-
-            <div className="w-full h-7/8 flex items-center justify-center">
+            <div className="w-full h-7/8 backdrop-blur-sm rounded-b-xl flex items-center justify-center">
                 <div className="w-1/2 h-full p-6">
 
                     <div className="flex gap-3 mb-3 text-white">

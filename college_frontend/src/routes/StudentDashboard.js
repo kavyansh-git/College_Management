@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import { useStudent } from "../context/StudentContext";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Header from "../components/shared/Header";
 import StudentSidebar from "../components/shared/StudentSidebar";
 import FeesPieChart from "../components/shared/FeesPieChart";
@@ -41,7 +42,7 @@ const StudentDashboardComponent = () => {
                   <div className="w-full h-full grid grid-cols-3 grid-rows-3">
                     
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2 rounded-tl-xl row-span-2">
-                      <div className="w-9/10 h-95/10 border border-white rounded-xl">
+                      <div className="w-9/10 h-95/10 border border-white rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         
                         <div className="w-full h-1/7 bg-white bg-opacity-10 flex items-center justify-center border-b border-white">
                             <div className="w-1/6 h-full text-white flex items-center justify-center">
@@ -60,7 +61,7 @@ const StudentDashboardComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <FeesPieChart deposited={100000} total={150000} />
@@ -73,7 +74,7 @@ const StudentDashboardComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="stash:search-results" width="80" className=""/>
@@ -86,7 +87,7 @@ const StudentDashboardComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="iconoir:brain-research" width="80" className=""/>
@@ -99,7 +100,7 @@ const StudentDashboardComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2 rounded-tl-xl row-span-2">
-                      <div className="w-9/10 h-95/10 border border-white rounded-xl">
+                      <div className="w-9/10 h-95/10 border border-white rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         
                         <div className="w-full h-1/7 bg-white bg-opacity-10 flex items-center justify-center border-b border-white">
                             <div className="w-1/6 h-full text-white flex items-center justify-center">
@@ -118,7 +119,7 @@ const StudentDashboardComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 rounded-t-xl text-white flex items-center justify-center">
                               <div className="w-8/10 border-2 border-black shadow shadow-gray-500 bg-gray-300 bg-opacity-20 rounded-full h-4 overflow-hidden">
@@ -136,14 +137,14 @@ const StudentDashboardComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white backdrop-blur-sm rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="solar:document-add-outline" width="80" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
+                            <Link to="/StudentNotes" className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
                               Notes
-                            </div>
+                            </Link>
                         </div>
                       </div>
                     </div>
