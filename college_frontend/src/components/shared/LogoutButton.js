@@ -28,7 +28,7 @@ const LogoutButton = () => {
                         <div className="w-1/4 h-6/10 mr-2 flex items-center justify-end text-white font-semibold">
                             <Icon icon="icon-park-outline:people-safe" width="32" />
                         </div>
-                        <button onClick={handleLogout} className="w-1/3 h-6/10 border-2 border-white flex items-center justify-center text-white font-semibold rounded-lg hover: cursor-pointer hover:text-blue-500 hover:border-blue-500">
+                        <button onClick={handleLogout} className="w-1/3 h-6/10 backdrop-blur-sm border-2 border-white flex items-center justify-center text-white font-semibold rounded-lg hover: cursor-pointer hover:text-blue-500 hover:border-blue-500">
                             Logout
                         </button>
                     </div>

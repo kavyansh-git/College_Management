@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "../components/shared/Header";
 import FacultySidebar from "../components/shared/FacultySidebar";
 import UploadPDFModal from "../components/shared/UploadPDFModal";
@@ -13,6 +14,7 @@ const FacultyDashboardComponent = () => {
   
     const [fillWidth, setFillWidth] = useState(0);
     const [showModal, setShowModal] = useState(false);
+    const [uploadModalLabel, setUploadModalLabel] = useState('');
   
     useEffect(() => {
       const timeout = setTimeout(() => {
@@ -22,9 +24,20 @@ const FacultyDashboardComponent = () => {
       return () => clearTimeout(timeout);
     }, [leavePercent]);
 
-    const handleModal = () => {
+    const handleNoticeUploadModal = () => {
+      setUploadModalLabel('Notice');
       setShowModal(true);
-    };  
+    };
+    
+    const handleAssignmentUploadModal = () => {
+      setUploadModalLabel('Assignment');
+      setShowModal(true);
+    };
+
+    const handleNotesUploadModal = () => {
+      setUploadModalLabel('Notes');
+      setShowModal(true);
+    };
 
   return (
 
@@ -107,7 +120,7 @@ const FacultyDashboardComponent = () => {
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="material-symbols:add-notes-outline-rounded" width="80" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center">
+                            <div onClick={handleNotesUploadModal} className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
                               Notes upload
                             </div>
                         </div>
@@ -120,9 +133,9 @@ const FacultyDashboardComponent = () => {
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="pepicons-pop:raise-hand-circle" width="80" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center">
+                            <Link to="/FacultyAttendance" className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
                               Attendance upload
-                            </div>
+                            </Link>
                         </div>
                       </div>
                     </div>
@@ -133,8 +146,8 @@ const FacultyDashboardComponent = () => {
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="material-symbols:assignment-add-outline-rounded" width="80" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center">
-                              Assignments upload
+                            <div onClick={handleAssignmentUploadModal} className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
+                              Assignment upload
                             </div>
                         </div>
                       </div>
@@ -146,7 +159,7 @@ const FacultyDashboardComponent = () => {
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="lucide:mail-plus" width="80" className=""/>
                             </div>
-                            <div onClick={handleModal} className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
+                            <div onClick={handleNoticeUploadModal} className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
                               Notice upload
                             </div>
                         </div>
@@ -163,7 +176,7 @@ const FacultyDashboardComponent = () => {
       </div>
     </div>
 
-      <UploadPDFModal isOpen={showModal} onClose={() => setShowModal(false)} label="Notice" />
+      <UploadPDFModal isOpen={showModal} onClose={() => setShowModal(false)} label={uploadModalLabel} />
 
     </div>
     );

@@ -76,8 +76,8 @@ export default function UploadPDFModal({ isOpen, onClose, label }) {
                     <div className="">Title :
                         <input
                             type="text"
-                            placeholder="Enter Notice Title here"
-                            className="input ml-4 mt-2 p-2 bg-black text-white border hover:border-blue-400 border-white rounded"
+                            placeholder={`Enter ${label} title here`}
+                            className="w-8/10 input ml-4 mt-2 p-2 bg-black text-white border hover:border-blue-400 border-white rounded"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -98,7 +98,7 @@ export default function UploadPDFModal({ isOpen, onClose, label }) {
                         htmlFor="noticeFile"
                         className="inline-block bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700 transition duration-200 ease-in-out mb-4"
                     >
-                    📁 Select PDF Notice
+                    📁 Select PDF file
                     </label>
 
                     {/* File name preview */}

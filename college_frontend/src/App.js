@@ -16,6 +16,7 @@ import FacultyDashboardComponent from "./routes/FacultyDashboard";
 import FacultyProfileComponent from "./routes/FacultyProfile";
 import FacultyExamsComponent from "./routes/FacultyExams";
 import FacultyTimetableComponent from "./routes/FacultyTimetable";
+import FacultyAttendanceComponent from "./routes/FacultyAttendance";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/FacultyProfile" element={<FacultyProfileComponent />} />
           <Route path="/FacultyExams" element={<FacultyExamsComponent />} />
           <Route path="/FacultyTimetable" element={<FacultyTimetableComponent />} />
+          <Route path="/FacultyAttendance" element={<FacultyAttendanceComponent />} />
           
 
         </Routes>

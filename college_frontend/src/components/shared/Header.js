@@ -14,7 +14,7 @@ const Header = () => {
             </div>
             <div className="w-6/7 h-full flex items-center justify-center">
                 <div className="w-8/10 h-full flex items-center justify-center">
-                <div className="w-9/10 h-8/10 shadow shadow-white rounded-xl flex flex-col items-center justify-center">
+                <div className="w-9/10 h-8/10 backdrop-blur-sm shadow shadow-white rounded-xl flex flex-col items-center justify-center">
                     <div className="w-full h-2/3 border-b rounded-t-xl bg-black bg-opacity-50 text-2xl font-bold text-red-600 text-center flex justify-center items-center">
                         SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING & TECHNOLOGY
                     </div>

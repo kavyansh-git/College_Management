@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Notice = require("../../models/Notice");
+const Assignment = require("../../models/Assignment");
 
 // GET all notices
 router.get("/notices", async (req, res) => {
@@ -13,7 +14,7 @@ router.get("/notices", async (req, res) => {
     if (branch) filter.branch = branch;
     if (title) filter.title = { $regex: title, $options: "i" }; // case-insensitive search
 
-    const notices = await Notice.find(filter).sort({ createdAt: -1 });
+    const notices = await Notice.find(filter);
     res.status(200).json(notices);
   } catch (error) {
     console.error("Error fetching notices:", error.message);
@@ -21,5 +22,23 @@ router.get("/notices", async (req, res) => {
   }
 });
 
+// GET all assignments
+router.get("/assignments", async (req, res) => {
+  try {
+    const { batch, branch, title } = req.query;
+
+    // Build dynamic filter object
+    const filter = {};
+    if (batch) filter.batch = batch;
+    if (branch) filter.branch = branch;
+    if (title) filter.title = { $regex: title, $options: "i" }; // case-insensitive search
+
+    const assignments = await Assignment.find(filter);
+    res.status(200).json(assignments);
+  } catch (error) {
+    console.error("Error fetching assignments:", error.message);
+    res.status(500).json({ message: "Failed to fetch assignments", error: error.message });
+  }
+});
 
 module.exports = router;
