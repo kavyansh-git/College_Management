@@ -1,12 +1,12 @@
-import { Icon } from "@iconify/react";
-import { useState } from "react";
-import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelpers";
-import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { toast } from "react-toastify";
+import axios from "../utils/axios";
 import srms_logo from "../assets/images/srms-logo.png";
 import TextInput from "../components/shared/TextInput";
 import PasswordInput from "../components/shared/PasswordInput";
+import { Icon } from "@iconify/react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 import "../App.css";
 
 const AdminLoginComponent = () => {
@@ -17,22 +17,29 @@ const AdminLoginComponent = () => {
   const navigate = useNavigate();
 
   const login = async () => {
+    const data = {adminId, password};
 
-        const data = {adminId, password};
-        const response = await makeUnauthenticatedPOSTRequest("/admin/adminLogin", data);
-        if (response && !response.err) {
-            const token = response.token;
+        try {
+          const response = await axios.post("/admin/adminLogin", data);
+
+        if (response.data && !response.data.err) {
+            const token = response.data.token;
             const date = new Date();
             date.setDate(date.getDate() + 30);
+
+            // setting cookie for 30 days
             setCookie("token", token, {path: "/", expires: date});
             setCookie("user", response, {path: "/", expires: date});          
             navigate("/AdminDashboard");
             toast.success("Successfully logged in");
-        }
-        else {
+        } else {
             toast.error("Failed to login!");
         }
-    }
+      } catch (error) {
+        console.error("Login error:", error.response?.data || error.message);
+        toast.error("Server error during login");
+      }
+  };
 
   return (
 

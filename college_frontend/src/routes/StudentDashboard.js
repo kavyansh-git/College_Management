@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/shared/Header";
 import StudentSidebar from "../components/shared/StudentSidebar";
 import FeesPieChart from "../components/shared/FeesPieChart";
+import NoticeBox from "../components/shared/NoticeBox";
 import "../App.css";
 
 const StudentDashboardComponent = () => {
@@ -40,7 +41,8 @@ const StudentDashboardComponent = () => {
                   <div className="w-full h-full grid grid-cols-3 grid-rows-3">
                     
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2 rounded-tl-xl row-span-2">
-                      <div className="w-9/10 h-95/10 bg-black border border-white rounded-xl">
+                      <div className="w-9/10 h-95/10 border border-white rounded-xl">
+                        
                         <div className="w-full h-1/7 bg-white bg-opacity-10 flex items-center justify-center border-b border-white">
                             <div className="w-1/6 h-full text-white flex items-center justify-center">
                               <Icon icon="ion:mail-notification-outline" width="28"/>
@@ -49,9 +51,11 @@ const StudentDashboardComponent = () => {
                               Notices
                             </div>
                         </div>
-                        <div className="w-full h-1/6 bg-gray-500 flex items-center justify-center">
-                          Notice 1
+
+                        <div className="w-full h-6/7">
+                          <NoticeBox batch="2022" branch="CS" />
                         </div>
+
                       </div>
                     </div>
 

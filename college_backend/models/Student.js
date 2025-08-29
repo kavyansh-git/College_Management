@@ -89,8 +89,11 @@ const Student = new mongoose.Schema({
     dob: {
         type: String,
         required: false,
+    },
+    gender: {
+        type: String,
+        required: false,
     }
-
 });
 
 const studentModel = mongoose.model("Student" , Student);

@@ -17,6 +17,7 @@ const adminRoutes = require("./models/routes/admin");
 const studentRoutes = require("./models/routes/student");
 const facultyRoutes = require("./models/routes/faculty");
 const uploadRoutes = require("./models/routes/upload");
+const viewRoutes = require("./models/routes/view");
 
 require("dotenv").config(); 
 const cors = require("cors"); 
@@ -114,6 +115,7 @@ app.use("/admin" , adminRoutes);
 app.use("/student" , studentRoutes);
 app.use("/faculty" , facultyRoutes);
 app.use("/upload" , uploadRoutes);
+app.use("/view" , viewRoutes);
 
 app.get("/admin", authenticateRole('admin'), (req, res) => {
     res.json({ message: 'Welcome Admin!' });

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useNoticeUpload } from "../../services/useNoticeUpload";
-import { toast } from "react-toastify"
+import { usePDFUpload } from "../../services/usePDFUpload";
+import { toast } from "react-toastify";
 
-export default function UploadNoticeModal({ isOpen, onClose, label }) {
+export default function UploadPDFModal({ isOpen, onClose, label }) {
   const [title, setTitle] = useState("");
   const [batch, setBatch] = useState("");
   const [branch, setBranch] = useState("");
   const [file, setFile] = useState(null);
-  const { uploadNotice, loading } = useNoticeUpload();
+  const { uploadPDF, loading } = usePDFUpload();
 
   const handleClose = () => {
   setTitle("");
@@ -19,10 +19,12 @@ export default function UploadNoticeModal({ isOpen, onClose, label }) {
 
   const handleSubmit = async () => {
 
-    const response = await uploadNotice({ title, batch, branch, file });
+    console.log("file sent from modal is :" , file);
+
+    const response = await uploadPDF({ title, batch, branch, file, label });
     handleClose();
     if (response) {
-        toast.success("Notice uploaded successfully!");
+        toast.success(`${label} uploaded Successfully! 🎉`);
     }
   };
 
@@ -54,19 +56,19 @@ export default function UploadNoticeModal({ isOpen, onClose, label }) {
                                 <option value="">Select Batch</option>
                                 <option value="2022">2022</option>
                                 <option value="2023">2023</option>
-                                <option value="2023">2024</option>
-                                <option value="2023">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
                             </select>
                         </div>
 
                         <div className="flex items-center justify-center">Branch :
                             <select className="input p-2 ml-2 bg-black text-white border hover:text-blue-400 hover:cursor-pointer hover:border-blue-400 border-white rounded" value={branch} onChange={(e) => setBranch(e.target.value)}>
                                 <option value="">Select Branch</option>
-                                <option value="CSE">CS</option>
-                                <option value="CSE">IT</option>
-                                <option value="ECE">EC</option>
-                                <option value="ECE">EN</option>
-                                <option value="ECE">ME</option>
+                                <option value="CS">CS</option>
+                                <option value="IT">IT</option>
+                                <option value="EC">EC</option>
+                                <option value="EN">EN</option>
+                                <option value="ME">ME</option>
                             </select>
                         </div>
                     </div>

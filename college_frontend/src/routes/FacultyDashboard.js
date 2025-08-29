@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import Header from "../components/shared/Header";
 import FacultySidebar from "../components/shared/FacultySidebar";
-import UploadNoticeModal from "../components/shared/UploadNoticeModal";
+import UploadPDFModal from "../components/shared/UploadPDFModal";
 import "../App.css";
 
 const FacultyDashboardComponent = () => {
@@ -163,7 +163,7 @@ const FacultyDashboardComponent = () => {
       </div>
     </div>
 
-      <UploadNoticeModal isOpen={showModal} onClose={() => setShowModal(false)} label="Notice" />
+      <UploadPDFModal isOpen={showModal} onClose={() => setShowModal(false)} label="Notice" />
 
     </div>
     );

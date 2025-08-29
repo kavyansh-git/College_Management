@@ -8,7 +8,7 @@ const noticeSchema = new mongoose.Schema({
   batch: String,
   branch: String,
   createdAt: { type: Date, default: Date.now },
-});
+}, { timestamps: true });
 
 const noticeModel = mongoose.model("Notice", noticeSchema);
 

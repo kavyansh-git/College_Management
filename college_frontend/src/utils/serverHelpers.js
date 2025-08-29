@@ -18,6 +18,7 @@ export const makeUnauthenticatedPOSTRequest = async (route, body) => {
 export const makeUnauthenticatedPOSTRequestForUpload = async (route, formData) => {
     
     // route: /studentCreate
+    console.log("formData received is :" , {formData} )
     const response = await fetch(backendUrl + route, 
         {
          method: "POST",

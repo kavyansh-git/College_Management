@@ -2,8 +2,10 @@ import { useState } from "react";
 import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelpers";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 import TextInput from "../components/shared/TextInput";
 import RadioButtonGroup from "../components/shared/RadioButton";
+import SelectField from "../components/shared/SelectField";
 import PasswordInput from "../components/shared/PasswordInput";
 import Header from "../components/shared/Header";
 import "../App.css";
@@ -24,6 +26,7 @@ const StudentCreateComponent = () => {
   const [religion, setReligion] = useState('');
   const [caste, setCaste] = useState('');
   const [dob, setDob] = useState('');
+  const [gender, setGender] = useState('');
   const [fatherName, setFatherName] = useState('');
   const [fatherOccupation, setFatherOccupation] = useState('');
   const [motherName, setMotherName] = useState('');
@@ -34,6 +37,9 @@ const StudentCreateComponent = () => {
   const [contactNoParents, setContactNoParents] = useState('');
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+  const courses = ["B.Tech", "B.Pharm", "B.C.A.", "M.Tech", "M.Pharm"];
+  const batches = ["2022", "2023", "2024", "2025"];
+  const branches = ["CS", "IT", "EC", "EN", "ME"];
 
   const handleSubmit = async () => {
     
@@ -51,6 +57,7 @@ const StudentCreateComponent = () => {
       religion,
       caste,
       dob,
+      gender,
       fatherName,
       fatherOccupation,
       motherName,
@@ -67,12 +74,11 @@ const StudentCreateComponent = () => {
             const date = new Date();
             date.setDate(date.getDate() + 30);
             setCookie("token", token, {path: "/", expires: date});
-            alert("Success");
-            console.log("Student created successfully:", response);
+            toast.success("Student created successfully!");
             // Redirect to the admin dashboard after successful creation
           navigate("/AdminDashboard");
       } else {
-            alert("Failure");
+            toast.error("Failed to create student!");
         }
     };
     
@@ -161,40 +167,56 @@ const StudentCreateComponent = () => {
                         </div>                        
                     </div>
 
-                    <div className="w-full h-1/4 flex items-center justify-center">                        
+                    <div className="w-full h-1/4 flex items-center justify-center">
+
                         <div className="w-1/3 h-full flex text-white items-center justify-center">
-                            <div className="w-8/10 h-9/10 flex items-center justify-center">
-                                <TextInput 
-                                    label="Course*"
-                                    placeholder="Enter Student's course"
-                                    className="my-4"
-                                    value={course}
-                                    setValue={setCourse}    
-                                />
+                            <div className="w-8/10 h-full flex items-center justify-start">
+                                <div className="flex gap-3 mb-2 text-white">                                    
+                                    <SelectField
+                                        id="course"
+                                        label="Course"
+                                        required={true}
+                                        value={course}
+                                        onChange={setCourse}
+                                        options={courses}
+                                        placeholder="Select Course"
+                                    />
+                                </div>
                             </div>
                         </div>
+
                         <div className="w-1/3 h-full flex text-white items-center justify-center">
-                            <div className="w-8/10 h-9/10 flex items-center justify-center">
-                                <TextInput 
-                                    label="Batch*"
-                                    placeholder="Enter Student's batch"
-                                    className="my-4"
-                                    value={batch}
-                                    setValue={setBatch}    
-                                />
-                            </div>    
-                        </div>  
-                        <div className="w-1/3 h-full flex text-white items-center justify-center">
-                            <div className="w-8/10 h-9/10 flex items-center justify-center">
-                                <TextInput 
-                                    label="Branch*"
-                                    placeholder="Enter Student's branch"
-                                    className="my-4"
-                                    value={branch}
-                                    setValue={setBranch}    
-                                />
-                            </div>    
+                            <div className="w-8/10 h-full flex items-center justify-start">
+                                <div className="flex gap-3 mb-2 text-white">                                    
+                                    <SelectField
+                                        id="batch"
+                                        label="Batch"
+                                        required={true}
+                                        value={batch}
+                                        onChange={setBatch}
+                                        options={batches}
+                                        placeholder="Select Batch"
+                                    />
+                                </div>
+                            </div>
                         </div>
+
+                        <div className="w-1/3 h-full flex text-white items-center justify-center">
+                            <div className="w-8/10 h-full flex items-center justify-start">
+                                <div className="flex gap-3 mb-2 text-white">                                    
+                                    <SelectField
+                                        id="branch"
+                                        label="Branch"
+                                        required={true}
+                                        value={branch}
+                                        onChange={setBranch}
+                                        options={branches}
+                                        placeholder="Select Branch"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div className="w-full h-1/4 flex items-center justify-center">                        
@@ -249,7 +271,9 @@ const StudentCreateComponent = () => {
                             <div className="w-8/10 h-9/10 flex items-center justify-start">
                                 <RadioButtonGroup
                                   label="Gender"
-                                  options={['Male', 'Female', 'Other']}                                                                    
+                                  options={['Male', 'Female', 'Other']}
+                                  selectedValue={gender}
+                                  onChange={setGender}                                                                    
                                 />
                             </div>
                         </div>
