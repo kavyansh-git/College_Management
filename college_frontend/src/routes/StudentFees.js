@@ -1,10 +1,34 @@
-import Dropdown from "../components/shared/Dropdown";
-import AddButton from "../components/shared/AddButton";
 import Header from "../components/shared/Header";
 import StudentSidebar from "../components/shared/StudentSidebar";
+import FeeDetailCard from "../components/shared/FeeDetailCard";
+import { useState } from "react";
 import "../App.css";
+import FeePayCard from "../components/shared/FeePayCard";
 
 const StudentFeesComponent = () => {
+
+  const [feesAdded, setFeesAdded] = useState([]);
+  const feeDetails = [
+  { id: "tution", label: "Tution fees", total: "84,391", remaining: "24,821" },
+  { id: "other", label: "Registration, ERP, Medical & Student Welfare Charges", total: "41,220", remaining: "41,220" },
+  { id: "bus", label: "Bus fees", total: "18,000", remaining: "9,000" },
+  { id: "security", label: "Security deposit (One Time)", total: "10,000", remaining: "10,000" },
+  // Add more as needed
+  ];
+
+  const amountToBePaid = feesAdded.reduce((acc, fee) => acc + fee.amount, 0);
+
+  const grandTotal = feeDetails.reduce((acc, fee) => {
+    const numericTotal = parseInt(fee.total.replace(/,/g, ""), 10);
+    return acc + numericTotal;
+  }, 0);
+
+  const grandRemaining = feeDetails.reduce((acc, fee) => {
+    const numericTotal = parseInt(fee.remaining.replace(/,/g, ""), 10);
+    return acc + numericTotal;
+  }, 0);
+
+
   return (
     // parent div of all divs
     <div className="h-screen w-screen" class="background">
@@ -18,7 +42,7 @@ const StudentFeesComponent = () => {
 
             <div className="w-6/7 h-full flex items-center justify-center">
               <div className="w-full h-full flex items-center justify-center bg-black bg-opacity-70">
-                <div className="w-9/10 h-9/10 bg-black bg-opacity-30 border border-white rounded-xl">
+                <div className="w-9/10 h-9/10 bg-black bg-opacity-30 backdrop-blur-sm border border-white rounded-xl">
                   <div className="w-full h-1/10 bg-white bg-opacity-10 flex items-center justify-center border-b border-white text-white text-xl">
                     Fees Details
                   </div>
@@ -32,10 +56,10 @@ const StudentFeesComponent = () => {
                         Fees description
                       </div>
                       <div className="w-1/7 h-full pl-4 border-r border-white font-semibold flex items-center justify-center">
-                        Total fees
+                        Total
                       </div>
                       <div className="w-1/7 h-full border-r border-white font-semibold flex items-center justify-center">
-                        Remaining fees
+                        Remaining
                       </div>
                       <div className="w-1/7 h-full border-r border-white font-semibold flex items-center justify-center">
                         Installments
@@ -45,131 +69,45 @@ const StudentFeesComponent = () => {
                       </div>
                     </div>
 
-                    <div className="w-full h-1/10 border-b border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        1.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Tution fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        ₹ 99,282
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        ₹ 49,282
-                      </div>
-                      <div className="w-1/7 h-full font-thin flex items-center justify-center">
-                        <Dropdown header = "Select" label = "tution" />
-                      </div>
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
-                        <AddButton />
-                      </div>
-                    </div>
+                    <FeeDetailCard 
+                        index="1" 
+                        id="tution" 
+                        label="Tution fees" 
+                        total="84,391" 
+                        remaining="24,821" 
+                        feesAdded={feesAdded} 
+                        setFeesAdded={setFeesAdded}
+                      />
 
-                    <div className="w-full h-1/10 border-b border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        2.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Medical fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        Total fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/7 h-full font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
-                        <AddButton />
-                      </div>
-                    </div>
+                      <FeeDetailCard 
+                        index="2" 
+                        id="other" 
+                        label="Registration, ERP, Medical & Student Welfare Charges" 
+                        total="41,220" 
+                        remaining="41,220" 
+                        feesAdded={feesAdded} 
+                        setFeesAdded={setFeesAdded}
+                      />
 
-                    <div className="w-full h-1/10 border-b border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        3.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Student welfare fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        Total fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/7 h-full font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
-                        <AddButton />
-                      </div>
-                    </div>
+                      <FeeDetailCard 
+                        index="3" 
+                        id="bus" 
+                        label="Bus fees" 
+                        total="18,000" 
+                        remaining="9,000" 
+                        feesAdded={feesAdded} 
+                        setFeesAdded={setFeesAdded}
+                      />
 
-                    <div className="w-full h-1/10 border-b border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        4.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Bus fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        ₹ 17,000
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        ₹ 8,500
-                      </div>
-                      <div className="w-1/7 h-full font-thin flex items-center justify-center">
-                        <Dropdown header = "Select" label = "bus"/>
-                      </div>
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
-                        <AddButton />
-                      </div>
-                    </div>
-
-                    <div className="w-full h-1/10 border-b border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        5.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Security deposit
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        ₹ 10,000
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/7 h-full font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
-                        <AddButton />
-                      </div>
-                    </div>
-
-                    <div className="w-full h-1/10 border-b border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        6.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Other fees
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/7 h-full pl-4 font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/7 h-full font-thin flex items-center justify-center">
-                        -
-                      </div>
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
-                        <AddButton />
-                      </div>
-                    </div>
+                      <FeeDetailCard 
+                        index="4" 
+                        id="security" 
+                        label="Security deposit (One Time)" 
+                        total="10,000" 
+                        remaining="10,000" 
+                        feesAdded={feesAdded} 
+                        setFeesAdded={setFeesAdded}
+                      />
 
                     <div className="w-full h-1/10 border-b-2 border-t border-white flex items-center text-lg justify-center font-medium text-white">
                       <div className="w-1/10 h-full font-thin flex items-center justify-center"></div>
@@ -177,14 +115,15 @@ const StudentFeesComponent = () => {
                         Grand total
                       </div>
                       <div className="w-1/7 h-full pl-4 font-semibold flex items-center justify-center">
-                        ₹ 1,26,282
+                        ₹ {grandTotal.toLocaleString()}
                       </div>
                       <div className="w-1/7 h-full pl-4 font-semibold flex items-center justify-center">
-                        ₹ 57,782
+                        ₹ {grandRemaining.toLocaleString()}
                       </div>
                       <div className="w-1/7 h-full font-thin flex items-center justify-center"></div>
                       <div className="w-1/10 h-full font-thin flex items-center justify-center"></div>
                     </div>
+
 
                     <div className="w-full h-1/10 border-b border-white flex items-center text-lg justify-center font-medium text-white">                      
                     </div>
@@ -208,38 +147,14 @@ const StudentFeesComponent = () => {
                       </div>                      
                     </div>
 
-                    <div className="w-full h-1/10 border-b border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        1.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Tution fees
-                      </div>
-                      <div className="w-3/10 h-full border-r pl-4 font-thin flex items-center justify-center">
-                        
-                      </div>                      
-                      <div className="w-1/4 h-full font-thin flex items-center justify-center">
-                        ₹ 49,282
-                      </div>
-                    </div>
-
-                    <div className="w-full h-1/10 border-dashed border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full border-r border-white font-thin flex items-center justify-center">
-                        2.
-                      </div>
-                      <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-start">
-                        Bus fees
-                      </div>
-                      <div className="w-3/10 h-full border-r pl-4 font-thin flex items-center justify-center">
-                        
-                      </div>                      
-                      <div className="w-1/4 h-full font-thin flex items-center justify-center">
-                        ₹ 8,500
-                      </div>
-                    </div>
+                    {feesAdded.map ((fee, index) => (
+                      <FeePayCard key={index} index={index} label={fee.label} amount={fee.amount.toLocaleString()} />
+                    ))}
 
                     <div className="w-full h-1/10 border-t-2 border-white flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center"></div>
+                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
+
+                      </div>
                       <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-center">
                           
                       </div>
@@ -247,12 +162,14 @@ const StudentFeesComponent = () => {
                         Amount to be paid  
                       </div>                      
                       <div className="w-1/4 h-full font-semibold flex items-center justify-center">
-                        ₹ 57,782
+                        ₹ {amountToBePaid.toLocaleString()}
                       </div>
                     </div>
 
                     <div className="w-full h-1/7 flex items-center text-lg justify-center font-medium text-white">
-                      <div className="w-1/10 h-full font-thin flex items-center justify-center"></div>
+                      <div className="w-1/10 h-full font-thin flex items-center justify-center">
+
+                      </div>
                       <div className="w-5/10 h-full pl-5 font-thin flex items-center justify-center">
                           
                       </div>
@@ -260,11 +177,13 @@ const StudentFeesComponent = () => {
                           
                       </div>                      
                       <div className="w-1/4 h-full font-semibold flex items-center justify-center">
-                        <div className="w-8/10 h-6/10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 cursor-pointer">
+                        <button 
+                          className="w-8/10 h-6/10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                          disabled={amountToBePaid === 0}>
                           Proceed to pay
-                        </div>
+                        </button>
                       </div>                      
-                    </div>                                      
+                    </div>                                     
 
                         
                     

@@ -3,7 +3,7 @@ import axios from "../../utils/axios";
 import PDFCard from "./viewPDFCard";
 import PDFModal from "./viewPDFModal";
 
-export default function NoticeBox({ batch, branch, label}) {
+export default function PDFBox({ batch, branch, label}) {
 
   const [pdfs, setPDFs] = useState([]);
   const [selectedPDF, setSelectedPDF] = useState(null);

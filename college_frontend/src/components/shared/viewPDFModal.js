@@ -1,4 +1,4 @@
-export default function NoticeModal({ pdf, onClose }) {
+export default function PDFModal({ pdf, onClose }) {
 
   const handleDownload = async () => {
   const response = await fetch(pdf.fileUrl);
@@ -12,7 +12,7 @@ export default function NoticeModal({ pdf, onClose }) {
 };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="relative w-1/2 h-9/10 border border-white rounded-lg shadow shadow-white overflow-hidden flex flex-col justify-between">
         
         {/* Header Section */}

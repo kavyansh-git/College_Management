@@ -93,6 +93,11 @@ const Student = new mongoose.Schema({
     gender: {
         type: String,
         required: false,
+    },
+    attendance: {
+        type: String,
+        required: false,
+        default: "0%",
     }
 });
 

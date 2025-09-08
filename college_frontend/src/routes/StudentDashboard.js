@@ -2,15 +2,21 @@ import { Icon } from "@iconify/react";
 import { useStudent } from "../context/StudentContext";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "../utils/axios";
 import Header from "../components/shared/Header";
 import StudentSidebar from "../components/shared/StudentSidebar";
 import FeesPieChart from "../components/shared/FeesPieChart";
-import PDFBox from "../components/shared/PDFBox";
+import PDFCard from "../components/shared/viewPDFCard";
+import PDFModal from "../components/shared/viewPDFModal";
 import "../App.css";
 
 const StudentDashboardComponent = () => {
 
   const { student } = useStudent();
+  const [notices, setNotices] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [selectedPDF, setSelectedPDF] = useState(null);
+
   const attendancePercentage = 75;
 
   const [fillWidth, setFillWidth] = useState(0);
@@ -21,7 +27,27 @@ const StudentDashboardComponent = () => {
     }, 500); // slight delay for smoother animation
 
     return () => clearTimeout(timeout);
-  }, [attendancePercentage]);  
+  }, [attendancePercentage]);
+  
+  const fetchNotices = async () => {
+      try {
+        const response = await axios.get(`/view/notices?batch=${student.batch}&branch=${student.branch}`); // adjust endpoint if needed
+        setNotices(response.data);
+      } catch (error) {
+        console.error("Failed to fetch notices:", error.response?.data || error.message);
+      }
+    };
+  fetchNotices();
+
+  const fetchAssignments = async () => {
+      try {
+        const response = await axios.get(`/view/assignments?batch=${student.batch}&branch=${student.branch}`); // adjust endpoint if needed
+        setAssignments(response.data);
+      } catch (error) {
+        console.error("Failed to fetch assignments:", error.response?.data || error.message);
+      }
+    };
+  fetchAssignments();
 
   return (
 
@@ -44,7 +70,7 @@ const StudentDashboardComponent = () => {
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2 rounded-tl-xl row-span-2">
                       <div className="w-9/10 h-95/10 border border-white rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         
-                        <div className="w-full h-1/7 bg-white bg-opacity-10 flex items-center justify-center border-b border-white">
+                        <div className="w-full h-1/7 bg-white bg-opacity-10 rounded-t-xl flex items-center justify-center border-b border-white">
                             <div className="w-1/6 h-full text-white flex items-center justify-center">
                               <Icon icon="ion:mail-notification-outline" width="28"/>
                             </div>
@@ -53,8 +79,14 @@ const StudentDashboardComponent = () => {
                             </div>
                         </div>
 
-                        <div className="w-full h-6/7">
-                          <PDFBox batch="2022" branch="CS" label="notices" />
+                        <div className="w-full h-6/7 px-0.5 overflow-y-auto">
+                          {notices.map((notice) => (
+                              <PDFCard pdf={notice} onClick={() => setSelectedPDF(notice)} />
+                            ))}
+
+                          {selectedPDF && (
+                              <PDFModal pdf={selectedPDF} onClose={() => setSelectedPDF(null)} />
+                            )}
                         </div>
 
                       </div>
@@ -102,7 +134,7 @@ const StudentDashboardComponent = () => {
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2 rounded-tl-xl row-span-2">
                       <div className="w-9/10 h-95/10 border border-white rounded-xl hover:shadow-md hover:shadow-white hover:border-2">
                         
-                        <div className="w-full h-1/7 bg-white bg-opacity-10 flex items-center justify-center border-b border-white">
+                        <div className="w-full h-1/7 bg-white bg-opacity-10 rounded-t-xl flex items-center justify-center border-b border-white">
                             <div className="w-1/6 h-full text-white flex items-center justify-center">
                               <Icon icon="hugeicons:assignments" width="28"/>
                             </div>
@@ -112,7 +144,13 @@ const StudentDashboardComponent = () => {
                         </div>
 
                         <div className="w-full h-6/7">
-                          <PDFBox batch="2022" branch="CS" label="assignments" />
+                          {assignments.map((assignment) => (
+                              <PDFCard pdf={assignment} onClick={() => setSelectedPDF(assignment)} />
+                            ))}
+
+                          {selectedPDF && (
+                              <PDFModal pdf={selectedPDF} onClose={() => setSelectedPDF(null)} />
+                            )}
                         </div>
 
                       </div>  

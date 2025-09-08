@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import profile_image from "../assets/images/profile_image1.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelpers";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -12,7 +12,9 @@ import "../App.css";
 import AdminSidebar from "../components/shared/AdminSidebar";
 
 const FacultyCreateComponent = () => {
-
+  
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [facultyId, setFacultyId] = useState('');
@@ -75,6 +77,20 @@ const FacultyCreateComponent = () => {
             alert("Failure");
         }
     };
+
+    useEffect(() => {
+        if (!file) {
+            setPreview(null);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(file);
+        setPreview(objectUrl);
+
+        return () => {
+            URL.revokeObjectURL(objectUrl); // cleanup previous preview
+        };
+    }, [file]);
     
 
   return (
@@ -95,34 +111,72 @@ const FacultyCreateComponent = () => {
                     Enter Faculty Details
                   </div>
                   <div className="w-full h-9/10 overflow-auto">
-                    <div className="w-full h-1/4 flex items-center justify-center">
-                        <div className="w-1/3 h-full flex text-white items-center justify-center">
-                            <div className="w-8/10 h-9/10 flex items-center justify-center">
-                                <TextInput 
-                                    label="First Name*"
-                                    placeholder="Enter Faculty's First name"
-                                    className="my-4"
-                                    value={firstName}
-                                    setValue={setFirstName}                                                                      
+                    <div className="w-full h-1/2 flex items-center justify-center">
+                                            <div className="w-2/3 h-full flex flex-col items-center justify-center">
+                    
+                                            <div className="w-full h-1/2 flex items-center justify-center">
+                                            </div>
                                         
-                                />
-                            </div>
-                        </div>
-                        <div className="w-1/3 h-full flex text-white items-center justify-center">
-                            <div className="w-8/10 h-9/10 flex items-center justify-center">
-                                <TextInput 
-                                    label="Last Name*"
-                                    placeholder="Enter faculty's last name"
-                                    className="my-4"
-                                    value={lastName}                                    
-                                    setValue={setLastName}    
-                                />
-                            </div>
-                        </div>
-                        <div className="w-1/3 h-full flex text-white items-center justify-center">
-                                
-                        </div>
-                    </div>
+                                            <div className="w-full h-1/2 flex items-center justify-center">                    
+                                                <div className="w-1/2 h-full flex text-white items-center justify-center">
+                                                    <div className="w-8/10 h-9/10 flex items-center justify-center">
+                                                        <TextInput 
+                                                            label="First Name*"
+                                                            placeholder="Enter faculty's First name"
+                                                            className="my-4"
+                                                            value={firstName}
+                                                            setValue={setFirstName}                                                                     
+                                                                
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="w-1/2 h-full flex text-white items-center justify-center">
+                                                    <div className="w-8/10 h-9/10 flex items-center justify-center">
+                                                        <TextInput 
+                                                            label="Last Name*"
+                                                            placeholder="Enter faculty's last name"
+                                                            className="my-4"
+                                                            value={lastName}                                    
+                                                            setValue={setLastName}    
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                
+                                            </div>
+                                            <div className="w-1/3 h-full flex flex-col items-center justify-center">
+                                                <div className="w-4/10 h-8/10 flex items-end justify-center">
+                                                    {/* Image upload component */}
+                                                    <div className="w-9/10 h-8/10 mb-4">
+                                                        <img
+                                                            alt="Upload profile"
+                                                            src={ preview || "https://media.istockphoto.com/id/1303840298/vector/photo-upload-icon-picture-flat-icons-uploading-your-photo-logo-camera-sign-vector-eps-10-ui.jpg?s=612x612&w=0&k=20&c=vvG8i2sRmEUFbcCcPzfO4wVbXCk3Fi53kCmMY_1n3WE=" }
+                                                            className="w-full h-full rounded-md border border-white object-cover"
+                                                            title="Profile Image"
+                                                            
+                                                        />
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-4/10 h-2/10 flex items-center justify-center text-white">
+                                                        {/* Hidden input */}
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            id="profileImage"
+                                                            className="hidden"
+                                                            onChange={(e) => setFile(e.target.files[0])}
+                                                        />
+                    
+                                                        {/* Custom trigger */}
+                                                        <label
+                                                            htmlFor="profileImage"
+                                                            className="inline-block bg-blue-600 text-white px-4 py-1 rounded cursor-pointer hover:bg-blue-700 transition duration-200 ease-in-out mb-4"
+                                                        >
+                                                        Select photo
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                        </div>
 
                     <div className="w-full h-1/4 flex items-center justify-center">
                       <div className="w-1/3 h-full flex text-white items-center justify-center">

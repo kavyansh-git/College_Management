@@ -129,8 +129,7 @@ router.post("/studentLogin" ,
 });
 
 // Get route to get info about the currently logged in student
-router.get(
-  "/getStudent/:studentId",
+router.get("/getStudent/:studentId",
     
     async (req, res) => {
     
@@ -147,48 +146,52 @@ router.get(
   }
 );
 
-// Get route to get all students i have created.
-router.get(
-    "/get/mystudents",
-     passport.authenticate("student", {session: false}),
-     async (req, res) => {
-        // We need to get all students where admin  id == currentAdmin._id
-        const students = await Student.find({admin: req.admin._id}).populate("admin");
-        return res.status(200).json({data: students});
+// POST rout to update student attendance
+router.post("/updateAttendance/:studentId", async (req, res) => {
+  try {
+    const studentId = req.params.studentId;
+    const { attendance } = req.body;
+
+    // Validate input
+    if (!attendance) {
+      return res.status(400).json({ message: "Attendance value is required" });
     }
-);
 
- // Get route to get all students any admin has created
- // I will send the admin id and I want to see all students that admin has published
- router.get(
-    "/get/admin/:adminId",
-     passport.authenticate("student", {session: false}),
-     async (req, res) => {  
-        const adminId = req.params.adminId;
-        
-        // We can check if the admin doesn't exist.
-        const admin = await Admin.findOne({_id: adminId});
-        if (!admin) {
-            return res.status(301).json({err: "Admin does not exist"});
-        } 
-
-        const students = await Student.find({admin: adminId});
-        return res.status(200).json({data: students});
+    // Find the student by ID
+    const student = await Student.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
     }
-);
 
- // Get route to get a single student by name
- router.get(
-    "/get/studentname/:studentName",
-     passport.authenticate("student", {session: false}),
-     async (req, res) => {
-        const studentName = req.params.studentName;
+    // Update attendance
+    student.attendance = attendance;
+    await student.save();
 
-        // name: studentName --> exact name matching. Vanilla, Vanila
-        // pattern matching instead of direct name matching.        
-        const students = await Student.find({firstName: studentName}).populate("firstName");
-        return res.status(200).json({data: students});
-    }
-);
+    res.status(200).json({ message: "Attendance updated successfully", student });
+  } catch (error) {
+    console.error("Error updating attendance:", error.message);
+    res.status(500).json({ message: "Failed to update attendance", error: error.message });
+  }
+});
+
+// GET students by batch and branch
+router.get("/getStudents", async (req, res) => {
+  try {
+    const { batch, branch } = req.query;
+
+    // Build dynamic filter object
+    const filter = {};
+    if (batch) filter.batch = batch;
+    if (branch) filter.branch = branch;
+
+    const students = await Student.find(filter).sort({ rollNo: 1 });
+    res.status(200).json(students);
+  } catch (error) {
+    console.error("Error fetching students:", error.message);
+    res.status(500).json({ message: "Failed to fetch students", error: error.message });
+  }
+});
+
+
 
 module.exports = router;
