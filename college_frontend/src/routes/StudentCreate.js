@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelpers";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
+import axios from "../utils/axios";
 import TextInput from "../components/shared/TextInput";
 import RadioButtonGroup from "../components/shared/RadioButton";
 import SelectField from "../components/shared/SelectField";
@@ -44,45 +44,58 @@ const StudentCreateComponent = () => {
   const branches = ["CS", "IT", "EC", "EN", "ME"];
 
   const handleSubmit = async () => {
-    
-    const studentData = {
-      firstName,
-      lastName,
-      rollNo,
-      regNo,
-      email,
-      password,
-      course,
-      batch,
-      branch,
-      nationality,
-      religion,
-      caste,
-      dob,
-      gender,
-      fatherName,
-      fatherOccupation,
-      motherName,
-      motherOccupation,
-      permanentAddress,
-      mailingAddress,
-      contactNoStudent,
-      contactNoParents
-    };
-    
-    const response = await makeUnauthenticatedPOSTRequest("/student/studentRegister", studentData);
-      if (response && !response.err) {                        
-          const token = response.token;
-            const date = new Date();
-            date.setDate(date.getDate() + 30);
-            setCookie("token", token, {path: "/", expires: date});
-            toast.success("Student created successfully!");
-            // Redirect to the admin dashboard after successful creation
-          navigate("/AdminDashboard");
-      } else {
-            toast.error("Failed to create student!");
-        }
-    };
+  console.log("file sent from admin panel is:", file);
+
+  const formData = new FormData();
+
+  // Append all student fields
+  formData.append("firstName", firstName);
+  formData.append("lastName", lastName);
+  formData.append("rollNo", rollNo);
+  formData.append("regNo", regNo);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("course", course);
+  formData.append("batch", batch);
+  formData.append("branch", branch);
+  formData.append("nationality", nationality);
+  formData.append("religion", religion);
+  formData.append("caste", caste);
+  formData.append("dob", dob);
+  formData.append("gender", gender);
+  formData.append("fatherName", fatherName);
+  formData.append("fatherOccupation", fatherOccupation);
+  formData.append("motherName", motherName);
+  formData.append("motherOccupation", motherOccupation);
+  formData.append("permanentAddress", permanentAddress);
+  formData.append("mailingAddress", mailingAddress);
+  formData.append("contactNoStudent", contactNoStudent);
+  formData.append("contactNoParents", contactNoParents);
+
+  // Append the image file
+  if (file) {
+    formData.append("file", file);
+  }
+
+  try {
+    const response = await axios.post("/student/studentRegister", formData );
+
+    if (response && !response.err) {
+      const token = response.token;
+      const date = new Date();
+      date.setDate(date.getDate() + 30);
+      setCookie("token", token, { path: "/", expires: date });
+      toast.success("Student created successfully!");
+      navigate("/AdminDashboard");
+    } else {
+      toast.error("Failed to create student!");
+    }
+  } catch (error) {
+    console.error("Error during student registration:", error);
+    toast.error("Something went wrong!");
+  }
+};
+
 
     useEffect(() => {
         if (!file) {

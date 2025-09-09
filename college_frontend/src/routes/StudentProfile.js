@@ -34,7 +34,7 @@ const StudentProfileComponent = () => {
                                         Name :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {`${student.firstName} ${student.lastName}`}
+                                        {student ? `${student.firstName} ${student.lastName}` : ""}
                                     </div>                              
                                 </div>
 
@@ -43,7 +43,7 @@ const StudentProfileComponent = () => {
                                         Roll no. :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.rollNo}
+                                        {student ? student.rollNo : ""}
                                     </div>                              
                                 </div>
 
@@ -52,7 +52,7 @@ const StudentProfileComponent = () => {
                                         Reg. no. :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.regNo}
+                                        {student ? student.regNo : ""}
                                     </div>                              
                                 </div>
 
@@ -61,7 +61,7 @@ const StudentProfileComponent = () => {
                                         Branch :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.branch}
+                                        {student ? student.branch : ""}
                                     </div>                              
                                 </div>
 
@@ -71,7 +71,7 @@ const StudentProfileComponent = () => {
                                           Course :
                                       </div>
                                       <div className="w-1/2 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.course}
+                                        {student ? student.course : ""}
                                       </div>
                                     </div>
                                     <div className="w-1/2 h-full flex items-center justify-center">
@@ -79,7 +79,7 @@ const StudentProfileComponent = () => {
                                           Batch :
                                       </div>
                                       <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.batch}
+                                        {student ? student.batch : ""}
                                       </div>
                                     </div>                                                                
                                 </div>
@@ -90,7 +90,7 @@ const StudentProfileComponent = () => {
                                           D.O.B. :
                                       </div>
                                       <div className="w-1/2 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                            {student.dob}
+                                            {student ? student.dob : ""}
                                       </div>
                                     </div>
                                     <div className="w-1/2 h-full flex items-center justify-center">
@@ -98,7 +98,7 @@ const StudentProfileComponent = () => {
                                           Nationality :
                                       </div>
                                       <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                          {student.nationality}
+                                          {student ? student.nationality : ""}
                                       </div>
                                     </div>                                                                
                                 </div>
@@ -109,7 +109,7 @@ const StudentProfileComponent = () => {
                                           Religion :
                                       </div>
                                       <div className="w-1/2 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                            {student.religion}
+                                            {student ? student.religion : ""}
                                       </div>
                                     </div>
                                     <div className="w-1/2 h-full flex items-center justify-center">
@@ -117,7 +117,7 @@ const StudentProfileComponent = () => {
                                           Caste :
                                       </div>
                                       <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                            {student.caste}
+                                            {student ? student.caste : ""}
                                       </div>
                                     </div>                                                                
                                 </div>
@@ -127,7 +127,7 @@ const StudentProfileComponent = () => {
                                         Father's name :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.fatherName}
+                                        {student ? student.fatherName : ""}
                                     </div>                              
                                 </div>                             
 
@@ -136,7 +136,7 @@ const StudentProfileComponent = () => {
                                         Father's occupation :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.fatherOccupation}
+                                        {student ? student.fatherOccupation : ""}
                                     </div>                              
                                 </div>                            
 
@@ -145,7 +145,7 @@ const StudentProfileComponent = () => {
                                         Mother's name :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.motherName}
+                                        {student ? student.motherName : ""}
                                     </div>                              
                                 </div>
 
@@ -154,7 +154,7 @@ const StudentProfileComponent = () => {
                                         Mother's occupation :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.motherOccupation}
+                                        {student ? student.motherOccupation : ""}
                                     </div>                              
                                 </div>
 
@@ -163,7 +163,7 @@ const StudentProfileComponent = () => {
                                         Permanent address :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.permanentAddress}
+                                        {student ? student.permanentAddress : ""}
                                     </div>                              
                                 </div>
 
@@ -172,7 +172,7 @@ const StudentProfileComponent = () => {
                                         Mailing address :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.mailingAddress}
+                                        {student ? student.mailingAddress : ""}
                                     </div>                              
                                 </div>                                
 
@@ -181,7 +181,7 @@ const StudentProfileComponent = () => {
                                         Contact no.( Student ) :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.contactNoStudent}
+                                        {student ? student.contactNoStudent : ""}
                                     </div>                              
                                 </div>
 
@@ -190,7 +190,7 @@ const StudentProfileComponent = () => {
                                         Contact no.( Parent ) :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.contactNoParents}
+                                        {student ? student.contactNoParents : ""}
                                     </div>                              
                                 </div>
 
@@ -199,7 +199,7 @@ const StudentProfileComponent = () => {
                                         E-mail :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {student.email}
+                                        {student ? student.email : ""}
                                     </div>                              
                                 </div>                      
 

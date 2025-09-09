@@ -3,17 +3,33 @@ const router = express.Router();
 const passport = require("passport");
 const {getToken} = require("./utils/helpers");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("./utils/cloudinary");
 const Faculty = require("../Faculty");
 const Admin = require("../Admin");
 
-router.post("/facultyRegister",
-     async (req, res) => {
+const imageStorage = new CloudinaryStorage({
+  cloudinary,
+  params: (req, file) => ({
+    folder: "faculty_images", // optional: rename to match content
+    allowed_formats: ["jpg", "jpeg", "png", "webp", "gif"], // image formats
+    public_id: `${Date.now()}-${file.originalname.split('.')[0]}`, // cleaner ID without extension
+  }),
+});
+
+
+const uploadImage = multer({ storage: imageStorage });
+
+router.post("/facultyRegister", uploadImage.single("file"), async (req, res) => {
     
     // This code is run when the /facultyRegister API is called as POST request
     //My req.body will be of the format { firstName, lastName, facultyId, password }
 
     // Step 1 : check whether the request has all the required fields.
-        const {
+    console.log("FILE:", req.file);
+
+    const {
       firstName,
       lastName,
       facultyId,
@@ -29,6 +45,7 @@ router.post("/facultyRegister",
       religion,
       caste,
       dob,
+      gender,
       fatherName,
       motherName,
       permanentAddress,
@@ -36,7 +53,9 @@ router.post("/facultyRegister",
       contactNo
     } = req.body;
 
-            if( !firstName || !lastName || !facultyId || !password) {
+    const profileImage = req.file?.url || req.file?.secure_url || req.file?.path || "https://res.cloudinary.com/dx6sflrsp/image/upload/v1757311430/profile_image1_fausns.jpg";
+
+            if( !firstName || !lastName || !facultyId || !password || !department ) {
                 return res
                     .status(301)
                     .json({err: "Insufficient details to create a faculty."});
@@ -78,11 +97,13 @@ router.post("/facultyRegister",
       religion,
       caste,
       dob,
+      gender,
       fatherName,
       motherName,
       permanentAddress,
       mailingAddress,
-      contactNo
+      contactNo,
+      profileImage
     };
         const newFaculty = await Faculty.create(newFacultyData);
 

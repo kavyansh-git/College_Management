@@ -17,17 +17,15 @@ const StudentDashboardComponent = () => {
   const [assignments, setAssignments] = useState([]);
   const [selectedPDF, setSelectedPDF] = useState(null);
 
-  const attendancePercentage = 75;
-
   const [fillWidth, setFillWidth] = useState(0);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setFillWidth(attendancePercentage);
+      setFillWidth(student ? student.attendance : "0%");
     }, 500); // slight delay for smoother animation
 
     return () => clearTimeout(timeout);
-  }, [attendancePercentage]);
+  }, [student]);
   
   const fetchNotices = async () => {
       try {
@@ -60,7 +58,7 @@ const StudentDashboardComponent = () => {
           <Header />
           
           <div className="w-full h-4/5 flex items-center justify-start">
-            <StudentSidebar curActiveScreen="Dashboard"/>
+            <StudentSidebar curActiveScreen="Dashboard" />
 
             <div className="w-6/7 h-full flex items-center justify-center">
               <div className="w-8/10 h-full flex items-center justify-center bg-black bg-opacity-70">
@@ -163,12 +161,12 @@ const StudentDashboardComponent = () => {
                               <div className="w-8/10 border-2 border-black shadow shadow-gray-500 bg-gray-300 bg-opacity-20 rounded-full h-4 overflow-hidden">
                                 <div
                                   className="bg-green-600 h-full transition-all duration-500"
-                                  style={{ width: `${fillWidth}%` }}
+                                  style={{ width: fillWidth }}
                                 ></div>
                               </div>
                             </div>
                             <div className="w-full h-1/4 font-medium text-white flex items-start justify-center">
-                              Attendance : {attendancePercentage}%
+                              Attendance : {student ? student.attendance : "0%"}
                             </div>
                         </div>
                       </div>

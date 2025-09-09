@@ -34,7 +34,7 @@ const AttendanceCard = ({ student, submitted, setSubmitted, index }) => {
       <div className="w-1/10 h-full flex items-center justify-center">
         <div className="overflow-hidden">
             <img
-                src="https://www.w3schools.com/howto/img_avatar.png"
+                src={student.profileImage}
                 alt="Avatar"
                 className="w-9 h-9 rounded-sm"
             />

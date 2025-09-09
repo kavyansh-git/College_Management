@@ -1,11 +1,11 @@
-import { Icon } from "@iconify/react";
-import profile_image from "../assets/images/profile_image1.jpg";
 import { useState, useEffect } from "react";
-import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelpers";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
+import axios from "../utils/axios";
 import TextInput from "../components/shared/TextInput";
 import RadioButtonGroup from "../components/shared/RadioButton";
+import SelectField from "../components/shared/SelectField";
 import PasswordInput from "../components/shared/PasswordInput";
 import Header from "../components/shared/Header";
 import "../App.css";
@@ -30,6 +30,7 @@ const FacultyCreateComponent = () => {
   const [religion, setReligion] = useState('');
   const [caste, setCaste] = useState('');
   const [dob, setDob] = useState('');
+  const [gender, setGender] = useState('');
   const [fatherName, setFatherName] = useState('');
   const [motherName, setMotherName] = useState('');
   const [permanentAddress, setPermanentAddress] = useState('');
@@ -37,46 +38,59 @@ const FacultyCreateComponent = () => {
   const [contactNo, setContactNo] = useState('');
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+  const departments = ["CS", "IT", "EC", "EN", "ME"];
 
   const handleSubmit = async () => {
+  console.log("file sent from admin panel is:", file);
+
+  const formData = new FormData();
+
+    // Append all faculty fields
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("facultyId", facultyId);
+    formData.append("regNo", regNo);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("department", department);
+    formData.append("yearOfJoining", yearOfJoining);
+    formData.append("specialization", specialization);
+    formData.append("qualification", qualification);
+    formData.append("experience", experience);
+    formData.append("nationality", nationality);
+    formData.append("religion", religion);
+    formData.append("caste", caste);
+    formData.append("gender", gender);
+    formData.append("dob", dob);
+    formData.append("fatherName", fatherName);
+    formData.append("motherName", motherName);
+    formData.append("permanentAddress", permanentAddress);
+    formData.append("mailingAddress", mailingAddress);
+    formData.append("contactNo", contactNo);
+
+    // Append image file if available
+    if (file) {
+    formData.append("file", file);
+    }
     
-    const FacultyData = {
-      firstName,
-      lastName,
-      facultyId,
-      regNo,
-      email,
-      password,
-      department,
-      yearOfJoining,
-      specialization,
-      qualification,
-      experience,
-      nationality,
-      religion,
-      caste,
-      dob,
-      fatherName,
-      motherName,
-      permanentAddress,
-      mailingAddress,
-      contactNo
-    };
-    
-    const response = await makeUnauthenticatedPOSTRequest("/Faculty/FacultyRegister", FacultyData);
-      if (response && !response.err) {                        
-          const token = response.token;
-            const date = new Date();
-            date.setDate(date.getDate() + 30);
-            setCookie("token", token, {path: "/", expires: date});
-            alert("Success");
-            console.log("Faculty created successfully:", response);
-            // Redirect to the admin dashboard after successful creation
-          navigate("/AdminDashboard");
-      } else {
-            alert("Failure");
+    try {
+        const response = await axios.post("/faculty/facultyRegister", formData );
+
+        if (response && !response.err) {
+        const token = response.token;
+        const date = new Date();
+        date.setDate(date.getDate() + 30);
+        setCookie("token", token, { path: "/", expires: date });
+        toast.success("Faculty created successfully!");
+        navigate("/AdminDashboard");
+        } else {
+        toast.error("Failed to create faculty!");
         }
-    };
+    } catch (error) {
+        console.error("Error during faculty registration:", error);
+        toast.error("Something went wrong!");
+    }
+};
 
     useEffect(() => {
         if (!file) {
@@ -217,14 +231,18 @@ const FacultyCreateComponent = () => {
 
                     <div className="w-full h-1/4 flex items-center justify-center">                        
                         <div className="w-1/3 h-full flex text-white items-center justify-center">
-                            <div className="w-8/10 h-9/10 flex items-center justify-center">
-                                <TextInput 
-                                    label="Department*"
-                                    placeholder="Enter faculty's department"
-                                    className="my-4"
-                                    value={department}
-                                    setValue={setDepartment}    
-                                />
+                            <div className="w-8/10 h-9/10 flex items-center justify-start">
+                                <div className="flex gap-3 mb-2 text-white">                                    
+                                    <SelectField
+                                        id="course"
+                                        label="Department"
+                                        required={true}
+                                        value={department}
+                                        onChange={setDepartment}
+                                        options={departments}
+                                        placeholder="Select Dept."
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="w-1/3 h-full flex text-white items-center justify-center">
@@ -331,8 +349,10 @@ const FacultyCreateComponent = () => {
                         <div className="w-1/3 h-full flex text-white items-center justify-center">
                             <div className="w-8/10 h-9/10 flex items-center justify-start">
                                 <RadioButtonGroup
-                                  label="Select Gender :"
-                                  options={['Male', 'Female', 'Other']}                                                                    
+                                  label="Gender"
+                                  options={['Male', 'Female', 'Other']}
+                                  selectedValue={gender}
+                                  onChange={setGender}                                                                    
                                 />
                             </div>
                         </div>

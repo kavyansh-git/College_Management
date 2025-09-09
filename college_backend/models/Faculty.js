@@ -15,7 +15,7 @@ const Faculty = new mongoose.Schema({
     },
     department: {
         type: String,
-        required: false,
+        required: true,
     },
     yearOfJoining: {
         type: String,
@@ -71,6 +71,10 @@ const Faculty = new mongoose.Schema({
         required: false,
     },
     nationality: {
+        type: String,
+        required: false,
+    },
+    gender: {
         type: String,
         required: false,
     },

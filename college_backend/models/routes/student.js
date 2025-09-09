@@ -3,17 +3,34 @@ const router = express.Router();
 const passport = require("passport");
 const {getToken} = require("./utils/helpers");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("./utils/cloudinary");
 const Student = require("../Student");
 const Admin = require("../Admin");
 
-router.post("/studentRegister",
-     async (req, res) => {
+const imageStorage = new CloudinaryStorage({
+  cloudinary,
+  params: (req, file) => ({
+    folder: "student_images", // optional: rename to match content
+    allowed_formats: ["jpg", "jpeg", "png", "webp", "gif"], // image formats
+    public_id: `${Date.now()}-${file.originalname.split('.')[0]}`, // cleaner ID without extension
+  }),
+});
+
+
+const uploadImage = multer({ storage: imageStorage });
+
+
+router.post("/studentRegister", uploadImage.single("file"), async (req, res) => {
     
     // This code is run when the /studentRegister API is called as POST request
     //My req.body will be of the format { firstName, lastName, rollNo, password }
 
     // Step 1 : check whether the request has all the required fields.
-        const {
+    console.log("FILE:", req.file);
+
+    const {
       firstName,
       lastName,
       rollNo,
@@ -37,7 +54,10 @@ router.post("/studentRegister",
       contactNoStudent,
       contactNoParents
     } = req.body;
-            if( !firstName || !lastName || !rollNo || !password) {
+
+      const profileImage = req.file?.url || req.file?.secure_url || req.file?.path || "https://res.cloudinary.com/dx6sflrsp/image/upload/v1757311430/profile_image1_fausns.jpg";
+
+            if( !firstName || !lastName || !rollNo || !password || !course || !batch || !branch ) {
                 return res
                     .status(301)
                     .json({err: "Insufficient details to create a student."});
@@ -85,7 +105,8 @@ router.post("/studentRegister",
       permanentAddress,
       mailingAddress,
       contactNoStudent,
-      contactNoParents
+      contactNoParents,
+      profileImage
     };
         const newStudent = await Student.create(newStudentData);
 

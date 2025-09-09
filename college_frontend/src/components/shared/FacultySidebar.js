@@ -1,14 +1,20 @@
 import profile_image from "../../assets/images/profile_image.jpg";
 import SidebarButton from "./SidebarButton";
+import { useFaculty } from "../../context/FacultyContext";
 
 const FacultySidebar = ({curActiveScreen}) => {
+
+    const { faculty } = useFaculty();
 
     return (
         <div className="w-1/7 h-full bg-black bg-opacity-70 backdrop-blur-sm border-r border-gray-500">
                 
-                <div className="w-full h-2/5 flex items-center justify-center border-b border-gray-500">
-                    <div className="w-40 h-41 rounded-full border-2 border-white">
-                        <img className="w-full object-cover rounded-full" src={profile_image} alt="photograph"/>
+                <div className="w-full aspect-square flex items-center justify-center border-b border-gray-500">
+                    <div className="w-2/3 aspect-square rounded-full overflow-hidden border-2 border-white">
+                        <img 
+                            className="w-full h-full object-cover" 
+                            src={ faculty ? faculty.profileImage : profile_image } 
+                            alt="photograph"/>
                     </div>
                 </div>
                 <div className="w-full h-3/5">
