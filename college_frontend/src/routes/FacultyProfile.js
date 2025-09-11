@@ -33,7 +33,7 @@ const FacultyProfileComponent = () => {
                                         Name :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {`${faculty.firstName} ${faculty.lastName}`}
+                                        {faculty ? `${faculty.firstName} ${faculty.lastName}` : ""}
                                     </div>                              
                                 </div>                                
 
@@ -42,7 +42,7 @@ const FacultyProfileComponent = () => {
                                         Reg. no. :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.regNo}
+                                        {faculty ? faculty.regNo : ""}
                                     </div>                              
                                 </div>
 
@@ -51,7 +51,7 @@ const FacultyProfileComponent = () => {
                                         Department :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.department}
+                                        {faculty ? faculty.department : ""}
                                     </div>                              
                                 </div>
 
@@ -61,7 +61,7 @@ const FacultyProfileComponent = () => {
                                           Qualification :
                                       </div>
                                       <div className="w-1/2 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                          {faculty.qualification}
+                                            {faculty ? faculty.qualification : ""}
                                       </div>
                                     </div>
                                     <div className="w-1/2 h-full flex items-center justify-center">
@@ -69,7 +69,7 @@ const FacultyProfileComponent = () => {
                                           Experience :
                                       </div>
                                       <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                          {faculty.experience}
+                                          {faculty ? faculty.experience : ""}
                                       </div>
                                     </div>                                                                
                                 </div>
@@ -80,7 +80,7 @@ const FacultyProfileComponent = () => {
                                           D.O.B. :
                                       </div>
                                       <div className="w-1/2 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                            {faculty.dob}
+                                            {faculty ? faculty.dob : ""}
                                       </div>
                                     </div>
                                     <div className="w-1/2 h-full flex items-center justify-center">
@@ -88,7 +88,7 @@ const FacultyProfileComponent = () => {
                                           Nationality :
                                       </div>
                                       <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                          {faculty.nationality}
+                                          {faculty ? faculty.nationality : ""}
                                       </div>
                                     </div>                                                                
                                 </div>
@@ -99,7 +99,7 @@ const FacultyProfileComponent = () => {
                                           Religion :
                                       </div>
                                       <div className="w-1/2 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                          {faculty.religion}
+                                          {faculty ? faculty.religion : ""}
                                       </div>
                                     </div>
                                     <div className="w-1/2 h-full flex items-center justify-center">
@@ -107,7 +107,7 @@ const FacultyProfileComponent = () => {
                                           Caste :
                                       </div>
                                       <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                          {faculty.caste}
+                                          {faculty ? faculty.caste : ""}
                                       </div>
                                     </div>                                                                
                                 </div>
@@ -117,7 +117,7 @@ const FacultyProfileComponent = () => {
                                         Father's name :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.fatherName}
+                                        {faculty ? faculty.fatherName : ""}
                                     </div>                              
                                 </div>                           
 
@@ -126,7 +126,7 @@ const FacultyProfileComponent = () => {
                                         Mother's name :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.motherName}
+                                        {faculty ? faculty.motherName : ""}
                                     </div>                              
                                 </div>
 
@@ -135,7 +135,7 @@ const FacultyProfileComponent = () => {
                                         Permanent address :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.permanentAddress}
+                                        {faculty ? faculty.permanentAddress : ""}
                                     </div>                              
                                 </div>
 
@@ -144,7 +144,7 @@ const FacultyProfileComponent = () => {
                                         Mailing address :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.mailingAddress}
+                                        {faculty ? faculty.mailingAddress : ""}
                                     </div>                              
                                 </div>                                
 
@@ -153,7 +153,7 @@ const FacultyProfileComponent = () => {
                                         Contact no. :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.contactNo}
+                                        {faculty ? faculty.contactNo : ""}
                                     </div>                              
                                 </div>                                
 
@@ -162,7 +162,7 @@ const FacultyProfileComponent = () => {
                                         E-mail :
                                     </div>
                                     <div className="w-5/6 h-full pl-4 rounded-xl font-thin flex items-center justify-start">
-                                        {faculty.email}
+                                        {faculty ? faculty.email : ""}
                                     </div>                              
                                 </div>                      
 

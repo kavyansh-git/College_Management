@@ -13,6 +13,7 @@ import AdminSidebar from "../components/shared/AdminSidebar";
 
 const StudentCreateComponent = () => {
 
+  const [creating, setCreating] = useState(false);
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [firstName, setFirstName] = useState('');
@@ -78,6 +79,7 @@ const StudentCreateComponent = () => {
   }
 
   try {
+    setCreating(true);
     const response = await axios.post("/student/studentRegister", formData );
 
     if (response && !response.err) {
@@ -93,6 +95,8 @@ const StudentCreateComponent = () => {
   } catch (error) {
     console.error("Error during student registration:", error);
     toast.error("Something went wrong!");
+  } finally {
+    setCreating(false);
   }
 };
 
@@ -481,12 +485,16 @@ const StudentCreateComponent = () => {
                     <div className="w-full h-1/4 flex items-center justify-start">
                       <div className="w-95/10 h-full flex items-center justify-end">
                         <button 
-                          className="w-2/10 h-1/3 text-white font-semibold rounded-lg bg-green-700 hover:bg-green-600 hover:cursor-pointer"
+                          className={`w-2/10 h-1/3 text-white font-semibold rounded-lg ${
+                                creating
+                                ? "bg-gray-500 hover:cursor-not-allowed opacity-70"
+                                : "bg-green-700 hover:bg-green-600 hover:cursor-pointer"
+                            }`}
                           onClick={(e) => {e.preventDefault();
                             handleSubmit();
                             }}
                           >
-                          Create Student                          
+                          {creating ? "Creating..." : "Create Student"}                          
                         </button>
                       </div>                        
                     </div>                   

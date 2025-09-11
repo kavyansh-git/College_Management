@@ -213,6 +213,21 @@ router.get("/getStudents", async (req, res) => {
   }
 });
 
+// GET students by roll no.
+router.get("/getStudent", async (req, res) => {
+  try {
+    const { rollNo } = req.query;
 
+    // Build dynamic filter object
+    const filter = {};
+    if (rollNo) filter.rollNo = rollNo;
+
+    const student = await Student.findOne(filter);
+    res.status(200).json(student);
+  } catch (error) {
+    console.error("Error fetching student:", error.message);
+    res.status(500).json({ message: "Failed to fetch student", error: error.message });
+  }
+});
 
 module.exports = router;

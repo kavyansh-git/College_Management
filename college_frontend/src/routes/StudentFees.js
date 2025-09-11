@@ -2,11 +2,15 @@ import Header from "../components/shared/Header";
 import StudentSidebar from "../components/shared/StudentSidebar";
 import FeeDetailCard from "../components/shared/FeeDetailCard";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "../utils/axios";
 import "../App.css";
 import FeePayCard from "../components/shared/FeePayCard";
 
 const StudentFeesComponent = () => {
 
+  const navigate = useNavigate();
   const [feesAdded, setFeesAdded] = useState([]);
   const feeDetails = [
   { id: "tution", label: "Tution fees", total: "84,391", remaining: "24,821" },
@@ -28,6 +32,43 @@ const StudentFeesComponent = () => {
     return acc + numericTotal;
   }, 0);
 
+  const handlePayment = async () => {
+
+    const { data: order } = await axios.post("/payment/create-order", { amount: amountToBePaid });
+
+    const options = {
+      key: "rzp_test_RFOgAlivkXdCZ3",
+      amount: order.amount,
+      currency: order.currency,
+      name: "SRMS College ERP",
+      description: "College Fee",
+      order_id: order.id,
+      handler: async (response) => {
+        const verifyRes = await axios.post("/payment/verify-payment", response);
+        if (verifyRes.data.success) {
+          toast.success("Payment successful!");
+          navigate("/StudentDashboard");
+        } else {
+          toast.error("Payment verification failed.");
+        }
+      },
+      prefill: {
+        name: "Kavyansh",
+        email: "kavyansh@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.on("payment.failed", function (response) {
+      console.error("Payment failed:", response.error);
+      toast.error("Payment failed. Please try again.");
+    });
+    rzp.open();
+};
 
   return (
     // parent div of all divs
@@ -179,7 +220,9 @@ const StudentFeesComponent = () => {
                       <div className="w-1/4 h-full font-semibold flex items-center justify-center">
                         <button 
                           className="w-8/10 h-6/10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                          disabled={amountToBePaid === 0}>
+                          disabled={amountToBePaid === 0}
+                          onClick={handlePayment}
+                        >
                           Proceed to pay
                         </button>
                       </div>                      

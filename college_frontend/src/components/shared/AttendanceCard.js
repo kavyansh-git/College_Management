@@ -36,7 +36,7 @@ const AttendanceCard = ({ student, submitted, setSubmitted, index }) => {
             <img
                 src={student.profileImage}
                 alt="Avatar"
-                className="w-9 h-9 rounded-sm"
+                className="w-9 aspect-square rounded-sm"
             />
         </div>
       </div>

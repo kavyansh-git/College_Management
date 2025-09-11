@@ -94,9 +94,9 @@ const FacultyDashboardComponent = () => {
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="uil:file-upload-alt" width="80" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center">
+                            <Link to="/FacultyResult" className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
                               Result upload
-                            </div>
+                            </Link>
                         </div>
                       </div>
                     </div>

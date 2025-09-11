@@ -6,6 +6,7 @@ const cloudinary = require("./utils/cloudinary");
 const Notice = require("../Notice");
 const Assignment = require("../Assignment");
 const Notes = require("../Notes");
+const Result = require("../Result");
 
 const noticeStorage = new CloudinaryStorage({
   cloudinary,
@@ -145,6 +146,34 @@ router.post("/pdf/upload/Notes", uploadNote.single("file"), async (req, res) => 
     await note.save();
 
     return res.status(201).json({ message: "Notes uploaded successfully", note });
+  } catch (error) {
+    console.error("Upload error:", error.message);
+    return res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+});
+
+router.post("/result", async (req, res) => {
+
+  console.log("BODY:", req.body);
+
+  try {
+
+    const { rollNo, exam, subjects } = req.body;
+    
+    // Validate required fields
+    if ( !exam || !rollNo ) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const result = new Result({
+      rollNo,
+      exam,
+      subjects
+    });
+
+    await result.save();
+
+    return res.status(201).json({ message: "Result uploaded successfully", result });
   } catch (error) {
     console.error("Upload error:", error.message);
     return res.status(500).json({ message: "Internal server error", error: error.message });
