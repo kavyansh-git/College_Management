@@ -45,7 +45,7 @@ const AdminLoginComponent = () => {
 
     // parent div of all divs
     <div className="h-screen w-screen" class="background">
-      <div className="w-full h-9/10 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="w-full h-9/10 bg-black bg-opacity-40 flex items-center justify-center">
 
         { /* first div  */ }
         <div className="w-1/2 h-full">
@@ -53,17 +53,17 @@ const AdminLoginComponent = () => {
                   <div className="w-1/3 h-1/2 flex items-center justify-center">
                     <img className=" w-full object-cover p-4" src={srms_logo} alt="spotify logo " width={125}/>
                   </div>
-              <div className="w-9/10 h-1/2 flex flex-col items-center justify-center">
+              <div className="w-9/10 h-1/2 shadow shadow-white rounded-xl backdrop-blur-sm flex flex-col items-center justify-center">
                   <div className="w-full h-2/3 border-b rounded-t-xl bg-black bg-opacity-50 text-2xl font-bold text-red-600 text-center flex justify-center items-center">
                       SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING & TECHNOLOGY
                   </div>
-                  <div className="w-full h-1/3 shadow-xl bg-opacity-50 rounded-b-xl bg-black font-semibold text-lg text-white text-center flex justify-center items-center">
-                      Nainital Road, Bareilly. (U.P. 243202)
+                  <div className="w-full h-1/3 shadow-xl rounded-b-xl bg-black bg-opacity-50 font-semibold text-lg text-white text-center flex justify-center items-center">
+                      Nainital Road, Bareilly. ( U.P. 243202 )
                   </div>
               </div>
             </div>
           <div className="w-full h-2/3 rounded-xl flex items-center justify-center">
-            <div className="w-2/3 h-4/5 flex-col border-4 border-white bg-black bg-opacity-60 text-white text-opacity-100 rounded-lg flex items-center justify-center">
+            <div className="w-2/3 h-4/5 flex-col border-4 border-white bg-black bg-opacity-50 backdrop-blur-sm text-white text-opacity-100 rounded-lg flex items-center justify-center">
               <div className="w-full h-4/5 rounded-t-lg flex items-center justify-evenly">
               <div className="w-1/3 h-3/4 flex flex-col items-center justify-center">
                           <div className="w-full h-3/5 mt-6 rounded-lg flex justify-center items-end">
@@ -90,7 +90,7 @@ const AdminLoginComponent = () => {
               </div>
             </div>            
           <div className="w-full h-1/5 rounded-b-lg flex items-start justify-center">
-            <button className="w-2/5 h-1/2 rounded-lg bg-green-800 flex justify-center items-center text-white font-semibold hover:bg-green-600"
+            <button className="w-2/5 h-1/2 rounded-lg bg-green-600 flex justify-center items-center text-white font-semibold hover:bg-green-700"
                     onClick={(e) => {e.preventDefault();
                     login();
                     }}
@@ -128,7 +128,7 @@ const AdminLoginComponent = () => {
             Developed by :
           </div>
           <div className="w-2/3 h-1/3 font-thin text-white flex items-center justify-center">
-            Kavyansh Gupta & other team members.
+            Kavyansh Gupta
           </div>
 
         </div>

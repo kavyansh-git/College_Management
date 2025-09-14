@@ -4,9 +4,9 @@ import { useStudent } from "../context/StudentContext";
 import { useState } from "react";
 import axios from "../utils/axios";
 import "../App.css";
-import NotesCard from "../components/shared/NotesCard";
+import AnswerCopiesCard from "../components/shared/AnswerCopiesCard";
 
-const StudentNotesComponent = () => {
+const StudentAnswerCopiesComponent = () => {
 
     const { student } = useStudent();
 
@@ -41,7 +41,7 @@ const StudentNotesComponent = () => {
                 <div className="w-9/10 h-9/10 bg-black bg-opacity-50 border border-white rounded-xl">
                   
                             <div className="w-full h-1/10 backdrop-blur-sm bg-white rounded-t-xl bg-opacity-10 flex items-center justify-center border-white text-white text-xl">
-                                Notes
+                                Answer Copies
                             </div>
                             <div className="w-full h-9/10 overflow-auto">                                
 
@@ -63,7 +63,7 @@ const StudentNotesComponent = () => {
 
                                 <div className="w-full h-3/4 rounded-b-xl border-t border-white overflow-y-auto flex flex-col items-center justify-start">
                                     {notes.map((note, index) => (
-                                            <NotesCard note={note} index={index} />
+                                            <AnswerCopiesCard note={note} index={index} />
                                     ))}                                    
                                 </div>
 
@@ -81,4 +81,4 @@ const StudentNotesComponent = () => {
     );
 }
 
-export default StudentNotesComponent;
+export default StudentAnswerCopiesComponent;

@@ -4,24 +4,24 @@ import { useStudent } from "../context/StudentContext";
 import { useState } from "react";
 import axios from "../utils/axios";
 import "../App.css";
-import NotesCard from "../components/shared/NotesCard";
+import ResultViewCard from "../components/shared/ResultViewCard";
 
-const StudentNotesComponent = () => {
+const StudentResultComponent = () => {
 
     const { student } = useStudent();
 
-    const [ notes, setNotes ] = useState([]);
+    const [ results, setResults ] = useState([]);
 
-        const fetchNotes = async () => {
+        const fetchResults = async () => {
           try {
-            const response = await axios.get(`/view/notes?batch=${student.batch}&branch=${student.branch}`); // adjust endpoint if needed
-            setNotes(response.data);
+            const response = await axios.get(`/view/results?rollNo=${student.rollNo}`); // adjust endpoint if needed
+            setResults(response.data);
           } catch (error) {
-            console.error("Failed to fetch notes:", error.response?.data || error.message);
+            console.error("Failed to fetch results:", error.response?.data || error.message);
           }
         };
     
-        fetchNotes();
+        fetchResults();
 
   return (
 
@@ -34,36 +34,33 @@ const StudentNotesComponent = () => {
           <Header />
           
           <div className="w-full h-4/5 flex items-center justify-start">
-            <StudentSidebar curActiveScreen="Dashboard"/>
+            <StudentSidebar curActiveScreen="Exams"/>
             
             <div className="w-6/7 h-full flex items-center justify-center">
               <div className="w-full h-full flex items-center justify-center bg-black bg-opacity-40">
-                <div className="w-9/10 h-9/10 bg-black bg-opacity-50 border border-white rounded-xl">
+                <div className="w-9/10 h-9/10 bg-black bg-opacity-50 backdrop-blur-sm border border-white rounded-xl">
                   
-                            <div className="w-full h-1/10 backdrop-blur-sm bg-white rounded-t-xl bg-opacity-10 flex items-center justify-center border-white text-white text-xl">
-                                Notes
+                            <div className="w-full h-1/10 bg-white rounded-t-xl bg-opacity-10 flex items-center justify-center border-b border-white text-white text-xl">
+                                Result ( 2025-26 )
                             </div>
                             <div className="w-full h-9/10 overflow-auto">                                
 
-                                <div className="w-full h-1/10 backdrop-blur-sm flex border-t items-center justify-center text-white">
+                                <div className="w-full h-1/10 flex items-center justify-center text-white">
                                     <div className="w-1/20 h-full pl-2 flex items-center justify-start">
                                         S.No
                                     </div>
-                                    <div className="w-6/10 h-full flex items-center pl-2 justify-start">
-                                        Description
+                                    <div className="w-8/10 h-full flex items-center pl-2 justify-start">
+                                        Exam
                                     </div>
                                     <div className="w-1/7 h-full flex items-center justify-center">
                                         Open
-                                    </div>
-                                    <div className="w-1/5 h-full flex items-center pl-2 justify-center">
-                                        Download
-                                    </div>                                   
+                                    </div>                                                                       
                                 </div>                                                     
                             
 
-                                <div className="w-full h-3/4 rounded-b-xl border-t border-white overflow-y-auto flex flex-col items-center justify-start">
-                                    {notes.map((note, index) => (
-                                            <NotesCard note={note} index={index} />
+                                <div className="w-full border-t border-white overflow-y-auto flex flex-col items-center justify-start">
+                                    {results.map((result, index) => (
+                                            <ResultViewCard result={result} index={index} />
                                     ))}                                    
                                 </div>
 
@@ -81,4 +78,4 @@ const StudentNotesComponent = () => {
     );
 }
 
-export default StudentNotesComponent;
+export default StudentResultComponent;

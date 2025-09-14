@@ -1,9 +1,14 @@
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
+import { useStudent } from "../context/StudentContext";
 import Header from "../components/shared/Header";
 import StudentSidebar from "../components/shared/StudentSidebar";
 import "../App.css";
 
 const StudentExamsComponent = () => {
+
+  const { student } = useStudent();
+
   return (
 
     // parent div of all divs
@@ -11,19 +16,19 @@ const StudentExamsComponent = () => {
       <div className="w-full h-full flex items-center justify-center">
 
         { /* first div  */ }
-        <div className="w-full h-full bg-black bg-opacity-60">
+        <div className="w-full h-full bg-black bg-opacity-40">
           <Header />
           
           <div className="w-full h-4/5 flex items-center justify-start">
             <StudentSidebar curActiveScreen="Exams"/>
             
             <div className="w-6/7 h-full flex items-center justify-center">
-              <div className="w-8/10 h-full flex items-center justify-center bg-black bg-opacity-70">
+              <div className="w-8/10 h-full flex items-center justify-center bg-black bg-opacity-40">
                 <div className="w-9/10 h-9/10 rounded-xl flex items-center justify-center">
                   <div className="w-full h-full grid grid-cols-3 grid-rows-3">
                     
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2 rounded-tl-xl row-span-2">
-                      <div className="w-9/10 h-95/10 border border-white rounded-xl">
+                      <div className="w-9/10 h-95/10 border border-white rounded-xl bg-black bg-opacity-40 backdrop-blur-sm">
                         <div className="w-full h-1/7 bg-white bg-opacity-10 flex items-center justify-center border-b border-white">
                             <div className="w-1/6 h-full text-white flex items-center justify-center">
                             <Icon icon="ion:mail-notification-outline" width="28"/>
@@ -36,12 +41,17 @@ const StudentExamsComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white rounded-xl bg-black bg-opacity-40 backdrop-blur-sm">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
-                              <Icon icon="uiw:verification" width="80" className=""/>
+                              <div className={`w-1/4 h-1/2 ${student ? (student.attendance.slice(0, -1) >= 75 ? "text-green-500" : "text-red-500") : ""} flex items-end pb-1 justify-end`}>
+                                <Icon icon={`${student ? (student.attendance.slice(0, -1) >= 75 ? "simple-line-icons:check" : "system-uicons:cross-circle") : ""}`} width="40" />
+                              </div>
+                              <div className={`w-1/2 h-1/2 ${student ? (student.attendance.slice(0, -1) >= 75 ? "text-green-500" : "text-red-500") : ""} text-lg font-semibold pl-4 flex items-end pb-2 justify-start`}>
+                                {`${student ? (student.attendance.slice(0, -1) >= 75 ? "Allowed" : "Not Allowed") : ""}`}
+                              </div>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
+                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center">
                               Admit card
                             </div>
                         </div>
@@ -49,27 +59,27 @@ const StudentExamsComponent = () => {
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white rounded-xl bg-black bg-opacity-40 backdrop-blur-sm">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="streamline-ultimate:bookmarks-document" width="70" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
-                              Exams result
-                            </div>
+                            <Link to="/StudentResult" className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
+                                Exams result
+                            </Link>
                         </div>
                       </div>
                     </div>
 
                     <div className="flex items-center justify-center pl-4 pr-4 pt-2 pb-2">
-                      <div className="w-9/10 h-9/10 border border-white rounded-xl">
+                      <div className="w-9/10 h-9/10 border border-white rounded-xl bg-black bg-opacity-40 backdrop-blur-sm">
                         <div className="w-full h-full rounded-xl flex-col items-center justify-center">
                             <div className="w-full h-3/4 text-white flex items-center justify-center">
                               <Icon icon="stash:search-results" width="85" className=""/>
                             </div>
-                            <div className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
-                              View answer sheets
-                            </div>
+                            <Link to="/StudentAnswerCopies" className="w-full h-1/4 font-medium text-white flex items-start justify-center hover:text-blue-400 cursor-pointer">
+                              View answer copies
+                            </Link>
                         </div>
                       </div>
                     </div>               
@@ -79,7 +89,7 @@ const StudentExamsComponent = () => {
                   </div>      
                 </div>
               </div>
-              <div className="w-2/10 h-full bg-black bg-opacity-70 flex items-center justify-center">
+              <div className="w-2/10 h-full bg-black bg-opacity-40 flex items-center justify-center">
             </div>            
           </div>
         </div>

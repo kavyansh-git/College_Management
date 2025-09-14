@@ -4,7 +4,7 @@ import LogoutButton from "./LogoutButton";
 const Header = () => {
     return (
         
-        <div className="w-full h-1/5 bg-black bg-opacity-50 flex items-center justify-center border-b border-white">
+        <div className="w-full h-1/5 bg-black bg-opacity-40 flex items-center justify-center border-b border-white">
             <div className="w-1/7 h-full flex items-center justify-evenly">
 
                   <div className="w-full h-full flex items-center justify-center">
@@ -19,7 +19,7 @@ const Header = () => {
                         SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING & TECHNOLOGY
                     </div>
                     <div className="w-full h-1/3 shadow-xl bg-opacity-50 rounded-b-xl bg-black font-semibold text-lg text-white text-center flex justify-center items-center">
-                        Nainital Road, Bareilly. (U.P. 243202)
+                        Nainital Road, Bareilly. ( U.P. 243202 )
                     </div>
                 </div>
                 </div>

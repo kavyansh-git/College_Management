@@ -29,7 +29,7 @@ export default function UploadPDFModal({ isOpen, onClose, label }) {
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="relative w-6/10 h-8/10 border border-white shadow shadow-white text-white rounded-xl">
 
             <div className="w-full h-1/8 backdrop-blur-sm rounded-t-xl border-b border-gray-400 bg-white bg-opacity-10 text-white flex items-center justify-center">

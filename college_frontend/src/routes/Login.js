@@ -7,7 +7,7 @@ const LoginComponent = () => {
   return (
     // parent div of all divs
     <div className="h-screen w-screen" class="background">
-      <div className="w-full h-9/10 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="w-full h-9/10 bg-black bg-opacity-40 flex items-center justify-center">
         {/* first div  */}
         <div className="w-1/2 h-full">
           <div className="w-full h-1/3 flex flex-col items-center justify-center">
@@ -19,17 +19,17 @@ const LoginComponent = () => {
                 width={125}
               />
             </div>
-            <div className="w-9/10 h-1/2 rounded-xl shadow shadow-white flex flex-col items-center justify-center">
+            <div className="w-9/10 h-1/2 rounded-xl backdrop-blur-sm shadow shadow-white flex flex-col items-center justify-center">
               <div className="w-full h-2/3 border-b rounded-t-xl bg-black bg-opacity-50 text-2xl font-bold text-red-600 text-center flex justify-center items-center">
                 SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING & TECHNOLOGY
               </div>
-              <div className="w-full h-1/3 shadow-xl bg-opacity-50 rounded-b-xl bg-black font-semibold text-lg text-white text-center flex justify-center items-center">
+              <div className="w-full h-1/3 shadow-xl rounded-b-xl bg-black bg-opacity-50 font-semibold text-lg text-white text-center flex justify-center items-center">
                 Nainital Road, Bareilly. (U.P. 243202)
               </div>
             </div>
           </div>
           <div className="w-full h-2/3 flex items-center justify-center">
-            <div className="w-8/10 h-4/5 shadow-xl rounded-xl bg-black bg-opacity-60">
+            <div className="w-8/10 h-4/5 shadow-xl rounded-xl backdrop-blur-sm bg-black bg-opacity-50">
               <div className="w-full h-2/10 flex items-center justify-center p-4 text-xl text-white font-semibold rounded-t-xl border-2 border-white">
                 Key features of ERP:
               </div>
@@ -49,12 +49,11 @@ const LoginComponent = () => {
                       Result upload
                     </li>
                     <li className="before:content-['➤'] before:mr-2">
-                      Assignments
-                    </li>
+                      Assignments & Tutorials upload
+                    </li>                    
                     <li className="before:content-['➤'] before:mr-2">
-                      Tutorials
+                    Notes upload
                     </li>
-                    <li className="before:content-['➤'] before:mr-2">Notes</li>
                   </ul>
                 </div>
 
@@ -70,15 +69,14 @@ const LoginComponent = () => {
                       Attendance tracking
                     </li>
                     <li className="before:content-['➤'] before:mr-2">
-                      Result
+                      view Result
                     </li>
                     <li className="before:content-['➤'] before:mr-2">
-                      Assignments
-                    </li>
+                      Assignments & Tutorials
+                    </li>                    
                     <li className="before:content-['➤'] before:mr-2">
-                      Tutorials
+                      Notes download
                     </li>
-                    <li className="before:content-['➤'] before:mr-2">Notes</li>
                   </ul>
                 </div>
               </div>
@@ -92,21 +90,21 @@ const LoginComponent = () => {
             <div className="w-1/10 h-1/2 mr-2 flex items-center justify-end text-white font-semibold">
               <Icon icon="icon-park-outline:people-safe" width="30" />
             </div>
-            <Link to="/AdminLogin" className="w-1/6 h-1/2 border-2 border-white flex items-center justify-center text-white font-semibold rounded-lg hover: cursor-pointer hover:text-blue-500 hover:border-blue-500">
+            <Link to="/AdminLogin" className="w-1/6 h-1/2 border-2 bg-black bg-opacity-50 backdrop-blur-sm border-white flex items-center justify-center text-white font-semibold rounded-lg hover: cursor-pointer hover:text-blue-500 hover:border-blue-500">
               Admin
             </Link>
           </div>
           <div className="w-2/3 h-1/5 flex items-center justify-center">
-            <div className="w-4/5 h-1/2 shadow shadow-white flex items-center justify-center text-white text-2xl font-semibold rounded-lg bg-black text-opacity-100 bg-opacity-50">
+            <div className="w-4/5 h-1/2 backdrop-blur-sm shadow shadow-white flex items-center justify-center text-white text-2xl font-semibold rounded-lg bg-black bg-opacity-50">
               Welcome to SRMS ERP
             </div>
           </div>
-          <div className="w-2/3 h-1/2 border-4 border-white bg-black bg-opacity-50 text-white text-opacity-100 rounded-lg flex items-center justify-center">
+          <div className="w-2/3 h-1/2 border-4 border-white bg-black bg-opacity-50 backdrop-blur-sm text-white text-opacity-100 rounded-lg flex items-center justify-center">
             <div className="w-1/2 h-3/4 border-r-2 border-white flex flex-col items-center justify-center">
               <div className="w-2/3 h-3/5 my-4 rounded-lg flex justify-center items-center">
                 <Icon icon="hugeicons:teacher" width="120" />
               </div>
-              <Link to="/FacultyLogin" className="w-2/3 h-1/6 rounded-lg bg-green-800 flex justify-center items-center text-white font-semibold hover:bg-green-600 cursor-pointer">
+              <Link to="/FacultyLogin" className="w-2/3 h-1/6 rounded-lg bg-green-600 flex justify-center items-center text-white font-semibold hover:bg-green-700 cursor-pointer">
                 Faculty                
               </Link>
             </div>
@@ -114,7 +112,7 @@ const LoginComponent = () => {
               <div className="w-2/3 h-3/5 my-4 rounded-lg flex justify-center items-center">
                 <Icon icon="hugeicons:students" width="120" />
               </div>
-              <Link to="/StudentLogin" className="w-2/3 h-1/6 rounded-lg bg-green-800 flex justify-center items-center text-white font-semibold hover:bg-green-600 cursor-pointer">
+              <Link to="/StudentLogin" className="w-2/3 h-1/6 rounded-lg bg-green-600 flex justify-center items-center text-white font-semibold hover:bg-green-700 cursor-pointer">
                 Student                
               </Link>
             </div>
@@ -149,7 +147,7 @@ const LoginComponent = () => {
             Developed by :
           </div>
           <div className="w-2/3 h-1/3 font-thin text-white flex items-center justify-center">
-            Kavyansh Gupta & other team members.
+            Kavyansh Gupta
           </div>
         </div>
 
